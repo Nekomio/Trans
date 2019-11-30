@@ -33,7 +33,7 @@ class SchoolFellowAdmin(admin.ModelAdmin):
     list_filter = [filterByGraduate, ] + FIELDS
     search_fields = FIELDS
     fields = list_display
-    view_on_site = False
 
 
 admin.site.site_header = "校友信息填报系统__后台管理"
+admin.site.site_url = None
