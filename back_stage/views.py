@@ -14,7 +14,7 @@ def login(request):
     return HttpResponse("this is back_stage login.")
 
 
-def logout(request):
+def get_excel(request):
     fellows = SchoolFellow.objects.order_by('姓名')
     print(fellows[0].姓名)
     ws = Workbook(encoding="utf-8")
@@ -53,6 +53,9 @@ def logout(request):
     res['Content-Disposition'] = 'attachment;filename = school_fellow_information_export_table.xls'
     return res
 
+
+def logout(request):
+    return HttpResponse("this is back_stage.logout")
 
 def home(request):
     response = HttpResponse(content_type='text/csv')

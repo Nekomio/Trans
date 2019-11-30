@@ -22,5 +22,9 @@ class SchoolFellow(models.Model):
     honour = models.TextField(name="所获荣誉", null=True)
     comments = models.TextField(name="备注", null=True)
 
-    def _get_name(self):
+    class Meta:
+        verbose_name = "校友"
+        verbose_name_plural = "校友们"
+
+    def __str__(self):
         return self.姓名
