@@ -3,7 +3,6 @@ from django.db import models
 
 
 class SchoolFellow(models.Model):
-    id = models.IntegerField(primary_key=True)
     name = models.CharField(name="姓名", max_length=30, null=False)
     sex = models.BooleanField(name="性别", null=False)
     tell = models.CharField(name="联系方式", max_length=11, null=False)
@@ -22,3 +21,6 @@ class SchoolFellow(models.Model):
     title = models.CharField(name="现职务职称", max_length=100, null=True)
     honour = models.TextField(name="所获荣誉", null=True)
     comments = models.TextField(name="备注", null=True)
+
+    def _get_name(self):
+        return self.姓名
