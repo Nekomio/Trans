@@ -24,3 +24,9 @@ FIELDS = ['姓名',
           '现职务职称',
           '所获荣誉',
           '备注', ]
+
+"""
+1. 先在 form 里指定 metho：POST
+2. form 里 标注 crf token
+3. 在 loginveiw 里
+"""

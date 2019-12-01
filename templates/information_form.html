@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/static/">
+    <!--    README    :         所有下拉列表中,当value值为0时是一个无意义的初始提示值,在验证时应禁止提交-->
+    <link href="css/bootstrap-grid.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+
+        .byr-blockquote {
+            /*border:red 1px solid;*/
+            border-left: 6px solid blue;
+            font-size: 1em;
+            padding: 10px;
+            display: flow;
+            background-color: rgba(200, 144, 255, 0.35);
+            /*background:linear-gradient(to right,rgba(200,144,255,0.35),);*/
+            margin: 0px 10px;
+            color:white;
+        }
+
+        .row {
+            padding: 10px 0;
+            margin: 0px 5px;
+            /*border: solid 1px red;*/
+        }
+
+        .col-md-2 label {
+            /*border: solid 1px blue;*/
+            margin: 0px;
+            padding-left: 5px;
+            padding-bottom: 5px;
+            padding-right: 5px;
+            margin-top: 2px;
+            display: inline-block;
+            color:white;
+        }
+
+        .col-md-4 input, .col-md-4 select {
+            /*border: solid 1px greenyellow;*/
+            position: relative;
+            width: 100%;
+            height: 30px;
+        }
+
+        .byr-form input, .byr-form-textarea textarea, .byr-form select {
+            -webkit-appearance: none;
+            border: solid 1px #ccc;
+            padding-left: 0.375em;
+        }
+
+        .byr-form input:focus, .byr-form-textarea textarea:focus {
+            /*使用蓝色聚焦,可以看到阴影十分重要*/
+            box-shadow: 0 0 0.5em rgba(93, 162, 248, 0.5);
+            border-color: #5da2f8;
+            /*防止出现重复渲染*/
+            outline: 0;
+        }
+
+        .byr-form-required:after {
+            margin: -0.2em 0em 0em 0.2em;
+            content: '*';
+            color: #DB2828;
+        }
+
+        .byr-form-table {
+            /*border: black 1px solid;*/
+            margin: 0px 10px;
+            padding: 10px;
+        }
+
+        .col-md-2 {
+            /*border: solid 1px green;*/
+        }
+
+        .byr-form-textarea textarea {
+            position: relative;
+            display: flow;
+            width: 100%;
+            /*border:solid 1px darkorange;*/
+            padding-top: 0.325em;
+            padding-bottom: 0.325em;
+        }
+
+        .byr-form-btn {
+            display: inline-block;
+            height: 42px;
+            line-height: 42px;
+            padding: 0 18px;
+            background-color: #ff7701;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 205px;
+        }
+
+        .byr-btn-g {
+            display: block;
+            /*border:solid 1px darkred;*/
+            text-align: center;
+            margin: 0px 0px;
+            width: 100%;
+            position: relative;
+        }
+
+        body, html {
+            /*第一次写background-image的适配移动屏幕*/
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            background-image: url(images/7.webp);
+            background-size: cover;
+        }
+
+        .byr-nav {
+            display: flow;
+            height: 64px;
+            background-color: black;
+            z-index: -1;
+            /*border:solid 1px red;*/
+            /*position: relative;*/
+            /*position:absolute;*/
+        }
+
+        .byr-exit {
+            float: right;
+            display: inline-block;
+            /*border:solid 1px red;*/
+            position: relative;
+            top: 10px;
+            color: gold;
+            padding: 10px;
+            right: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        @media (max-width: 968px) {
+            .row {
+                padding: 5px 0;
+            }
+
+            * {
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 768px) {
+            * {
+                font-size: 14px;
+            }
+
+            .row {
+                padding-top: 0px;
+            }
+
+            .col-md-2 {
+                padding: 5px 0;
+            }
+
+            textarea {
+                height: 120px;
+            }
+        }
+
+        @media (max-width: 460px) {
+            .byr-exit {
+                display: none;
+            }
+        }
+
+    </style>
+    <meta content="width=device-width,initial-width=1.0,minimum-width=1.0,maximum-width=3.0,shrink-to-fit=no"
+          name="viewport">
+    <meta content="IE=edge" http-equiv="x-ua-compatible">
+    <meta content="no-cache" http-equiv="Pragma">
+    <meta content="北京邮电大学校友登记表单" name="keywords">
+    <meta content="" name="description">
+    <meta content="index,follow" name="robots">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="byr-nav">
+    <img alt="icon" class="byr-nav-img" height="64px" src="images/6.png">
+    <a href="{% url 'user.logout' %}"><h3 class="byr-exit">退出</h3></a>
+</div>
+<div class="byr-main">
+    <form autocomplete="on" class="byr-form" method="POST">
+        <blockquote class="byr-blockquote">
+            基本信息
+            {% csrf_token %}
+        </blockquote>
+        <div class="byr-form-table">
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required">姓名</label>
+                </div>
+                <div class="col-md-4 ">
+                    <input id="name" name="name" type="text" value="{{ user.information.姓名 }}">
+                </div>
+                <div class="col-md-2">
+                    <label class="byr-form-required"> 性别</label>
+                </div>
+                <div class="col-md-4 ">
+                    <select id=sex name="sex">
+                        <option value="0">请选择</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required">手机号码/固定电话</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="phone" name="phone" type="text">
+                </div>
+                <div class="col-md-2">
+                    <label class="byr-form-required">电子邮箱</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="email" name="email" type="text" value="{{ user.information.电子邮箱 }}">
+                </div>
+            </div>
+        </div>
+        <blockquote class="byr-blockquote">
+            在校信息
+        </blockquote>
+        <div class="byr-form-table">
+            <!--            以下存疑-->
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="yuanxi">院系</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="yuanxi" name="yuanxi" type="text" value="{{ user.information.院系}}">
+                </div>
+                <div class="col-md-2">
+                    <label for="banji">班级</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="banji" name="banji" type="text" value="{{ user.information.班级 }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="xueli">北邮学历</label>
+                </div>
+                <div class="col-md-4">
+                    <select id="xueli" name="xueli" onchange="show(this.options)">
+                        <option value="1">本科生</option>
+                        <option value="2">硕士研究生</option>
+                        <option value="3">博士生</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="xuezhi">学制</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="xuezhi" name="xuezhi" placeholder="例:四年" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="startdate">入学年份</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="startdate" name="date1" type="date">
+                </div>
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="enddate">毕业年份</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="enddate" name="date2" type="date">
+                    <!--                认怂,这里不再追求本科生的地方也触发onchange,而是把hidden去掉-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="teacher">印象最深的教授或导员</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="teacher" id="teacher" name="teacher" type="text">
+                </div>
+                <div class="col-md-2">
+                    <label for="professor">导师姓名</label>
+                </div>
+                <div class="col-md-4 ">
+                    <input class="professor" disabled="disabled" id="professor" name="professor" type="text">
+                </div>
+            </div>
+        </div>
+        <!--    以下的Js内容控制了disabled的问题,由于受UI绘图时的布局限制,这里就简单将hidden处理为disabled-->
+        <script>
+            function show(e) {
+                // console.log(e);
+                //这里的value不是中文,而是键值对的value
+                const teacher = document.querySelector(".teacher");
+                const professor = document.querySelector(".professor");
+                for (let i = 0; i < xueli.length; i++) {
+                    let element = xueli.children.item(i);
+                    if (element.selected && i === 0) {
+                        teacher.removeAttribute("disabled");
+                        professor.setAttribute("disabled", "true");
+                        alert("学历为本科生时,不用填写导师姓名");
+                    } else if (element.selected && i !== 0) {
+                        professor.removeAttribute("disabled");
+                        teacher.setAttribute("disabled", "disabled");
+                        alert("学历为研究生时,不用填写辅导员或印象最深的导师!");
+                    }
+                }
+            }
+
+        </script>
+        <blockquote class="byr-blockquote">
+            工作信息
+        </blockquote>
+        <div class="byr-form-table">
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="workplace">现工作单位</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="workplace" name="workplace" placeholder="例:北京邮电大学" type="text">
+                </div>
+                <div class="col-md-2">
+                    <label for="now-work">现工作单位地址</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="now-work" name="now-work" placeholder="例:北京市海淀区西土城路10号" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="industry-seletor">行业类别</label>
+                </div>
+                <div class="col-md-4">
+                    <select id="industry-seletor" name="industry-seletor" onchange="render(this.options.selectedIndex)">
+                        <!--                    两个空格使之看起来居中一些:-其实of no use-->
+                        <option value="0">请选择</option>
+                        <option value="1">机关</option>
+                        <option value="2">事业单位</option>
+                        <option value="3">企业</option>
+                        <option value="4">其它</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="workprop">单位性质</label>
+                </div>
+                <div class="col-md-4">
+                    <select id="workprop" name="workprop">
+                        <option value="0">此处随行业类别变化而变化</option>
+                    </select>
+                </div>
+                <script>
+                    var a =
+                        [
+                            ["此处随行业类别变化而变化"],
+                            ["省级以上党政机关", "省级以下党政机关"],
+                            ["科研设计单位", "高等学校", "其它教育单位", "医疗卫生单位", "体育文化事业", "其它事业单位"],
+                            ["国有企业", "中外合资企业", "民营(私营)企业", "外资企业", "集体企业", "其他企业"],
+                            ["部队", "社会组织机构", "国际组织机构", "国防科工机构", "财政金融机构", "其它"]
+                        ];
+
+                    function render(index) {
+                        const workprop = document.getElementById("workprop");
+                        let showarray = a[index];
+                        // console.log(showarray);
+                        workprop.innerHTML = null;//初始化所有的列表项,删除
+                        for (let i = 0; i < showarray.length; i++) {
+                            //不支持ES6的写法
+                            let option = document.createElement("option");
+                            option.innerHTML = "<option value='1'>" + showarray[i] + "</option>";
+                            // console.log(option);
+                            workprop.add(option, null);
+                            //添加列表中的每一项
+                            //利用子节点的办法;
+                        }
+                    }
+
+                </script>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="status">现职务职称</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="status" name="status" type="text">
+                </div>
+                <div class="col-md-2">
+                    <label for="prize">所获荣誉</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="prize" name="prize" type="text" value="{{ inf.所获荣誉 }}">
+                </div>
+            </div>
+        </div>
+        <blockquote class="byr-blockquote">备注</blockquote>
+        <div class="byr-form-table">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="byt">邮子心声</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="byr-form-textarea">
+                        <textarea id="byt" name="byt" placeholder="写点最想给北邮说的悄悄话" value="{{ inf.备注 }}"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="byr-form-table">
+            <div class="row">
+                <!--            <div class="col-md-12">-->
+                <div class="byr-btn-g">
+                    <button class="byr-form-btn" type="submit">编辑/提交</button>
+                </div>
+                <!--            </div>-->
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

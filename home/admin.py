@@ -4,7 +4,7 @@ from datetime import date
 from django.contrib import admin
 
 from config import FIELDS
-from home.models import SchoolFellow
+from home.models import SchoolFellow, Account
 
 
 class filterByGraduate(admin.SimpleListFilter):
@@ -33,6 +33,13 @@ class SchoolFellowAdmin(admin.ModelAdmin):
     list_filter = [filterByGraduate, ] + FIELDS
     search_fields = FIELDS
     fields = list_display
+
+
+@admin.register(Account)
+class AccountAdmin(admin.ModelAdmin):
+    list_display = ['username', 'information']
+    # def information(self,obj):
+    #     return obj.information.姓名
 
 
 admin.site.site_header = "校友信息填报系统__后台管理"

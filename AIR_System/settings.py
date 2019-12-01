@@ -26,6 +26,7 @@ SECRET_KEY = 'nx*fjgq^+otbqt)ngf50wyv0^^p$+67e$fl&p2a_&48$9i#x!g'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+AUTH_USER_MODEL = 'home.Account'
 
 
 # Application definition
