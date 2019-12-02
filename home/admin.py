@@ -30,16 +30,44 @@ class filterByGraduate(admin.SimpleListFilter):
 @admin.register(SchoolFellow)
 class SchoolFellowAdmin(admin.ModelAdmin):
     list_display = FIELDS
-    list_filter = [filterByGraduate, ] + FIELDS
-    search_fields = FIELDS
-    fields = list_display
+
+    def 姓名(self, obj):
+        return obj.name
+
+    def 性别(self, obj):
+        return obj.sex
+
+    def 移动电话(self, obj):
+        return obj.tell
+
+    def 固定电话(self, obj):
+        return obj.fixed_tell
+
+    def 电子邮箱(self, obj):
+        return obj.email
+
+    # def
+    # list_display = FIELDS
+    # list_filter = [filterByGraduate, ] + FIELDS
+    # search_fields = FIELDS
+    # fields = list_display
 
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ['username', 'information']
-    # def information(self,obj):
-    #     return obj.information.姓名
+    list_display = ['username', '关联的详细个人信息', '性别']
+
+    def 性别(self, obj):
+        if obj.information:
+            return obj.information.性别
+        else:
+            return "超级用户没有性别之分"
+
+    def 关联的详细个人信息(self, obj):
+        if obj.information:
+            return obj.information.姓名
+        else:
+            return "超级用户没有详细信息"
 
 
 admin.site.site_header = "校友信息填报系统__后台管理"

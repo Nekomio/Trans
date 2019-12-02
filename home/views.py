@@ -72,14 +72,14 @@ def logout(request):
 # 'name': ['sa', 'sadlkfl;'], 'sex': ['1'], 'email': [''], 'yuanxi': [''], 'banji': [''], 'xueli': ['1'], 'xuezhi': [''], 'date1': [''], 'date2': [''], 'teacher': [''], 'workplace': [''], 'now-work': [''], 'industry-seletor': ['0'], 'workprop': ['0'], 'status': [''], 'prize': [''], 'byt': ['']}>
 @login_required(login_url='user.login')
 def information_filling(request):
+    information = request.user.information
     print("user:", request.user)
-    print(request.user.information)
+    print(information)
     if request.method == "POST":
         print(request.POST)
         dic = request.POST
-        print('dic_name:', dic['name'])
         name = dic['name']
-        tell = dic['name'][1]
+        tell = dic['phone']
         switch = {
             '1': "男",
             "2": "女",
@@ -119,10 +119,22 @@ def information_filling(request):
         title = dic['status']
         honor = dic['prize']
         comment = dic['byt']
-
-        information = SchoolFellow(姓名=name, 性别=sex, 联系方式=tell, 电子邮箱=email, 院系=yuanxi, 班级=banji, 学历=xueli, 学制=xuezhi,
-                                   入学年份=date1, 毕业年份=date2, 辅导员老师或印象最深刻的任课老师=teacher, 现工作单位=workplace, 工作单位地址=now_work,
-                                   行业类别=switch[industry_selector], 单位性质=workprop, 现职务职称=title, 所获荣誉=honor, 备注=comment)
+        if information:
+            information.姓名 = name
+            information.性别 = sex
+            information.联系方式 = tell
+            information.电子邮箱 = email
+            information.班级 = banji
+            information.院系 = yuanxi
+            information.学历 = xueli
+            information.学制 = xuezhi
+            information.xvezhi
+        else:
+            information = SchoolFellow(姓名=name, 性别=sex, 联系方式=tell, 电子邮箱=email, 院系=yuanxi, 班级=banji, 学历=xueli, 学制=xuezhi,
+                                       入学年份=date1, 毕业年份=date2, 辅导员老师或印象最深刻的任课老师=teacher, 现工作单位=workplace,
+                                       工作单位地址=now_work,
+                                       行业类别=switch[industry_selector], 单位性质=workprop, 现职务职称=title, 所获荣誉=honor,
+                                       备注=comment)
 
         print("information:", information, information.性别)
         information.save()
@@ -130,7 +142,6 @@ def information_filling(request):
         request.user.save()
         return HttpResponse("添加数据成功")
     else:
-        information = request.user.information
         if information:
             print("information is", information.姓名, information.性别, information.联系方式, information.院系, information.班级,
                   information.学历, information.学制)

@@ -57,6 +57,7 @@ def get_excel(request):
 def logout(request):
     return HttpResponse("this is back_stage.logout")
 
+
 def home(request):
     response = HttpResponse(content_type='text/csv')
     # response['mimetype'] = 'text/csv'
