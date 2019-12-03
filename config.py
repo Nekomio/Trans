@@ -6,7 +6,7 @@ LOGOUT_URL = 'logout'
 LOGIN_URL = 'login'
 MAIN_LOGIN_URL = MAIN_URL + '/login'
 MAIN_LOGOUT_URL = MAIN_URL + 'lo'
-FIELDS = ['姓名',
+fields = ['姓名',
           '性别',
           '移动电话',
           '固定电话',

@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from xlwt import Workbook, XFStyle
 
 # Create your views here.
-from config import FIELDS
+from config import fields
 from home.models import SchoolFellow
 
 
@@ -19,8 +19,8 @@ def get_excel(request):
     print(fellows[0].姓名)
     ws = Workbook(encoding="utf-8")
     w = ws.add_sheet(u"校友信息导出表")
-    for i in FIELDS:
-        w.write(0, FIELDS.index(i), i)
+    for i in fields:
+        w.write(0, fields.index(i), i)
     for i in range(len(fellows)):
         w.write(i + 1, 0, fellows[i].姓名)
         w.write(i + 1, 1, fellows[i].性别)
