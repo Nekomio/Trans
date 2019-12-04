@@ -96,9 +96,9 @@
             }
         }
         @media(min-width: 968px){
-                .byr-main-shadow{
-                    margin-top:80px;
-                }
+            .byr-main-shadow{
+                margin-top:80px;
+            }
         }
 
 
@@ -131,7 +131,7 @@
     <div class="byr-main-shadow">
         <h3 class="byr-form-title">校友信息系统</h3>
         <div class="byr-form">
-            <form action="/register/create" method="POST" target="_self">
+            <form action="/login" method="POST" target="_self">
                 {% csrf_token %}
                 <table class="byr-form-table">
                     <tr>
@@ -149,15 +149,7 @@
                         </td>
                         <td>
                             <input class="byr-form-text" name="password" placeholder="密码"
-                                   type="password" value="{{password}}">
-                        </td>
-                    <tr>
-                        <td>
-                            <img class="byr-i" src="icon/3b.png">
-                        </td>
-                        <td colspan="2">
-                            <input class="byr-form-text" name="checkpassword"
-                                   placeholder="确认密码" type="password">
+                                   title="{{password}}" type="password">
                         </td>
                     </tr>
                     <td>
@@ -181,12 +173,12 @@
                 </table>
                 <div class="byr-btn-g">
                     <!--                    注释:formaction指向不同的处理-->
-                    <button class="byr-btn">注册并登录</button>
+                    <button class="byr-btn">登录</button>
                 </div>
             </form>
         </div>
         <p>
-            已有账户? <a href="/login">直接登录</a>
+            还未注册? <a href="/register/get_passcode">注册</a>
         </p>
     </div>
 </div>

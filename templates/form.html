@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/static/">
+    <!--    README    :         所有下拉列表中,当value值为0时是一个无意义的初始提示值,在验证时应禁止提交-->
+    <link href="css/bootstrap-grid.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            white-space: nowrap;
+            color: black;
+        }
+        
+        .byr-main {
+            margin: 20px 40px;
+            padding-top: 25px;
+            padding-left: 15px;
+            padding-right: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+        }
+        
+        .byr-blockquote {
+            /*border:red 1px solid;*/
+            border-left: 6px solid blue;
+            font-size: 1em;
+            padding: 10px;
+            display: flow;
+            background-color: rgba(200, 144, 255, 0.35);
+            /*background:linear-gradient(to right,rgba(200,144,255,0.35),);*/
+            margin: 0px 10px;
+            color: black;
+        }
+        
+        .row {
+            padding: 10px 0;
+            margin: 0px 5px;
+            /*border: solid 1px red;*/
+        }
+        
+        .col-md-2 label {
+            /*border: solid 1px blue;*/
+            margin: 0px;
+            padding-left: 5px;
+            padding-bottom: 5px;
+            padding-right: 5px;
+            margin-top: 2px;
+            display: inline-block;
+            color: black;
+        }
+        
+        .col-md-4 input,
+        .col-md-4 select {
+            /*border: solid 1px greenyellow;*/
+            position: relative;
+            width: 100%;
+            height: 30px;
+            display: flow;
+        }
+        
+        .byr-form input,
+        .byr-form-textarea textarea,
+        .byr-form select {
+            -webkit-appearance: none;
+            border: solid 1px #ccc;
+            padding-left: 0.375em;
+        }
+        
+        .byr-form input:focus,
+        .byr-form-textarea textarea:focus {
+            /*使用蓝色聚焦,可以看到阴影十分重要*/
+            box-shadow: 0 0 0.5em rgba(93, 162, 248, 0.5);
+            border-color: #5da2f8;
+            /*防止出现重复渲染*/
+            outline: 0;
+        }
+        
+        .byr-form-required:after {
+            margin: -0.2em 0em 0em 0.2em;
+            content: '*';
+            color: #DB2828;
+        }
+        
+        .byr-form-table {
+            /*border: black 1px solid;*/
+            margin: 0px 10px;
+            padding: 10px;
+        }
+        
+        .col-md-2 {
+            /*border: solid 1px black;*/
+        }
+        
+        .col-md-4 {
+            /*border:solid 1px black;*/
+            border-left: 0px;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+        
+        .byr-form-textarea textarea {
+            position: relative;
+            display: flow;
+            width: 100%;
+            /*border:solid 1px darkorange;*/
+            padding-top: 0.325em;
+            padding-bottom: 0.325em;
+        }
+        
+        .byr-form-btn {
+            display: inline-block;
+            height: 42px;
+            line-height: 42px;
+            padding: 0 18px;
+            background-color: #FF5722;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 205px;
+        }
+        
+        .byr-btn-g {
+            display: block;
+            /*border:solid 1px darkred;*/
+            text-align: center;
+            margin: 0px 0px;
+            width: 100%;
+            position: relative;
+        }
+        
+        body,
+        html {
+            /*第一次写background-image的适配移动屏幕*/
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            background-image: url(images/20191128024554.jpg);
+            background-size: cover;
+            background-repeat: repeat;
+        }
+        
+        .byr-nav {
+            display: flow;
+            height: 64px;
+            background-image: linear-gradient(to right, #D9535A, #D9535A);
+            z-index: -1;
+            /*border:solid 1px red;*/
+            /*position: relative;*/
+            /*position:absolute;*/
+        }
+        
+        .byr-i {
+            float: right;
+            display: inline-block;
+            /*border:solid 1px red;*/
+            position: relative;
+            top: 10px;
+            padding: 10px;
+            right: 10px;
+            width: 45px;
+            height: 45px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        
+        .byr-font {
+            color: white;
+            font-family: sans-serif;
+            position: absolute;
+            top: 14px;
+            font-size: 22px;
+        }
+        
+        @media (max-width:968px) {
+            .row {
+                padding: 5px 0;
+            }
+            * {
+                white-space: normal;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            * {
+                font-size: 14px;
+            }
+            .row {
+                padding-top: 0px;
+                margin: 0 -10px;
+            }
+            .col-md-2 {
+                padding: 5px 0;
+            }
+            textarea {
+                height: 120px;
+            }
+        }
+        
+        @media (max-width: 460px) {
+            .byr-i {
+                display: none;
+            }
+            .byr-font {
+                display: none;
+            }
+            .byr-main {
+                margin: 0 0;
+            }
+        }
+
+
+    </style>
+    <meta content="width=device-width,initial-width=1.0,minimum-width=1.0,maximum-width=3.0,shrink-to-fit=no"
+          name="viewport">
+    <meta content="IE=edge" http-equiv="x-ua-compatible">
+    <meta content="no-cache" http-equiv="Pragma">
+    <meta content="北京邮电大学校友登记表单" name="keywords">
+    <meta content="" name="description">
+    <meta content="index,follow" name="robots">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div class="byr-nav">
+    <img alt="icon" class="byr-nav-img" height="64px" src="images/2019-12-02_232720.png">
+    <span class="byr-font">校友信息填报系统</span>
+    <a href="/logout"><img alt="退出" class="byr-i" src="images/20191203000942.png"></a>
+</div>
+<div class="byr-main">
+    <form action="/submit" autocomplete="on" class="byr-form" id="form_id" method="POST">
+        {% csrf_token %}
+        <blockquote class="byr-blockquote">
+            基本信息
+        </blockquote>
+        <div class="byr-form-table">
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required">姓名</label>
+                </div>
+                <div class="col-md-4 ">
+                    <input id="name" name="name" type="text" value="{{user.information.name}}">
+                    <!--                    <label>{{user.information.name}}</label>-->
+                </div>
+                <div class="col-md-2">
+                    <label class="byr-form-required"> 性别</label>
+                </div>
+                <div class="col-md-4 ">
+                    <select id="sex" name="sex">
+                        <option value="0">请选择</option>
+                        {% if user.information.sex == '男' %}
+                        <option selected='true' value="1">男</option>
+                        {% else %}
+                        <option value="1">男</option>
+                        {% endif %}
+                        {% if user.information.sex == '女' %}
+                        <option selected='true' value="2">女</option>
+                        {% else %}
+                        <option value="2">女</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required">手机号码</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="cellPhone" name="tell" placeholder="注：手机号码与固定电话至少填写一个" type="text"
+                           value="{{user.information.tell}}">
+                </div>
+                <div class="col-md-2">
+                    <label class="byr-form-required">固定电话</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="phone" name="fixed_tell" placeholder="注：手机号码与固定电话至少填写一个" type="text"
+                           value="{{user.information.fixed_tell}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required">电子邮箱</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="email" name="email" type="text" value="{{user.information.email}}">
+                </div>
+            </div>
+        </div>
+        <blockquote class="byr-blockquote">
+            在校信息
+        </blockquote>
+        <div class="byr-form-table">
+            <!--            以下存疑-->
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="department">院系</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="department" name="department" type="text" value="{{user.information.department}}">
+                </div>
+                <div class="col-md-2">
+                    <label for="class">班级</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="class" name="class" type="text" value="{{user.information.school_class}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="education">北邮学历</label>
+                </div>
+                <div class="col-md-4">
+                    <select id="education" name="education" onchange="show(this.options)">
+                        <option value="1">本科生</option>
+                        <option value="2">硕士研究生</option>
+                        <option value="3">博士生</option>
+                        <!--                         {% if user.information.education == '本科生' %}-->
+                        <!--                            <option selected='true' value="1">本科生</option>-->
+                        <!--                        {% else %}-->
+                        <!--                            <option value="1">本科生</option>-->
+                        <!--                        {% endif %}-->
+                        <!--                         {% if user.information.education == '硕士研究生' %}-->
+                        <!--                            <option selected='true' value="1">硕士研究生</option>-->
+                        <!--                        {% else %}-->
+                        <!--                            <option value="1">硕士研究生</option>-->
+                        <!--                        {% endif %}-->
+                        <!--                         {% if user.information.education == '博士生' %}-->
+                        <!--                            <option selected='true' value="1">博士生</option>-->
+                        <!--                        {% else %}-->
+                        <!--                            <option value="1">博士生</option>-->
+                        <!--                        {% endif %}-->
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="year">学制</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="year" name="year" placeholder="例:四年" type="text"
+                           value="{{user.information.year_system}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="start">入学年份</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="start" name="start" type="date" value="{{year_enroll}}">
+                </div>
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="graduate">毕业年份</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="graduate" name="graduate" type="date" value="{{year_graduate}}">
+                    <!--                认怂,这里不再追求本科生的地方也触发onchange,而是把hidden去掉-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="teacher" id="teacher-label">印象最深的教授或导员</label>
+                </div>
+                <div class="col-md-4">
+                    {% if user.information.teacher %}
+                    <input class="teacher" id="teacher" name="teacher" type="text" value="{{user.information.teacher}}">
+                    {% else %}
+                    <input class="teacher" id="teacher" name="teacher" type="text" value="{{user.information.mentor}}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!--    以下的Js内容控制了disabled的问题,由于受UI绘图时的布局限制,这里就简单将hidden处理为disabled-->
+        <script>
+                function show(e) {
+                    // console.log(e);
+                    //这里的value不是中文,而是键值对的value
+                    const teacherLabel = document.querySelector("#teacher-label");
+                    for (let i = 0; i < education.length; i++) {
+                        let element = education.children.item(i);
+                        if (element.selected && i === 0) {
+                            teacherLabel.textContent = "印象最深的教授或辅导员"
+                        } else if (element.selected && i !== 0) {
+                            teacherLabel.textContent = "导师姓名"
+                        }
+                    }
+                }
+
+
+        </script>
+        <blockquote class="byr-blockquote">
+            工作信息
+        </blockquote>
+        <div class="byr-form-table">
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="workplace">现工作单位</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="workplace" name="workplace" placeholder="例:北京邮电大学" type="text"
+                           value="{{user.information.current_work_unit}}">
+                </div>
+                <div class="col-md-2">
+                    <label for="address">现工作单位地址</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="address" name="address" placeholder="例:北京市海淀区西土城路10号" type="text"
+                           value="{{user.information.address_work_unit}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="category">行业类别</label>
+                </div>
+                <div class="col-md-4">
+                    <script type="text/javascript">
+                        var a = [
+                            ["此处随行业类别变化而变化"],
+                            ["省级以上党政机关", "省级以下党政机关"],
+                            ["科研设计单位", "高等学校", "其它教育单位", "医疗卫生单位", "体育文化事业", "其它事业单位"],
+                            ["国有企业", "中外合资企业", "民营(私营)企业", "外资企业", "集体企业", "其他企业"],
+                            ["部队", "社会组织机构", "国际组织机构", "国防科工机构", "财政金融机构", "其它"]
+                        ];
+
+                        function renderA(index) {
+                            const property = document.getElementById("property");
+                            let showarray = a[index];
+                            console.log(index);
+                            // console.log(showarray);
+                            property.innerHTML = null; //初始化所有的列表项,删除
+                            for (let i = 0; i < showarray.length; i++) {
+                                //不支持ES6的写法
+                                let option = document.createElement("option");
+                                option.innerHTML = "<option value='"+i+"'>" + showarray[i] + "</option>";
+                                console.log("{{user.information.unit_property}}"==showarray[i])
+                                if("{{user.information.unit_property}}"==showarray[i]){
+                                    option.selected = true
+                                }
+
+                                // console.log(option);
+                                property.add(option, null);
+                                //添加列表中的每一项
+                                //利用子节点的办法;
+                            }
+                        };
+                        var category = ['请选择','机关','事业单位','企业','其他'];
+                        var education_list = ['本科生','硕士研究生','博士生']
+                        window.onload = function(){
+                            console.log("ok");
+                            industry_category = document.getElementById("category");
+                            for(i=0;i<industry_category.options.length;++i){
+                                if(category[i] == "{{user.information.industry_category}}"){
+                                 renderA(i);
+                                }
+                            }
+                            education = document.getElementById("education");
+                            for(i=0;i<education.options.length;i++){
+                                console.log(""+i+":"+(education_list[i] == "{{user.information.education}}"))
+                                if(education_list[i] == "{{user.information.education}}"){
+                                    education.options[i].selected = true
+                                }
+                            }
+                            
+                         }
+
+
+
+                    </script>
+                    <select id="category" name="category" onchange="renderA(this.options.selectedIndex)">
+                        <!--                    两个空格使之看起来居中一些:-其实of no use-->
+                        <option value="0">请选择</option>
+                        {% if user.information.industry_category == '机关' %}
+                        <option selected='true' value="1">机关</option>
+                        {% else %}
+                        <option value="1">机关</option>
+                        {% endif %}
+                        {% if user.information.industry_category == '事业单位' %}
+                        <option selected='true' value="2">事业单位</option>
+                        {% else %}
+                        <option value="2">事业单位</option>
+                        {% endif %}
+                        {% if user.information.industry_category == '企业' %}
+                        <option selected='true' value="3">企业</option>
+                        {% else %}
+                        <option value="3">企业</option>
+                        {% endif %}
+                        {% if user.information.industry_category == '其他' %}
+                        <option selected='true' value="4">其他</option>
+                        {% else %}
+                        <option value="4">其他</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="property">单位性质</label>
+                </div>
+                <div class="col-md-4">
+                    <select id="property" name="property">
+                        <option value="0">此处随行业类别变化而变化</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="title">现职务职称</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="title" name="title" type="text" value="{{user.information.current_job_title}}">
+                </div>
+                <div class="col-md-2">
+                    <label for="honour">所获荣誉</label>
+                </div>
+                <div class="col-md-4">
+                    <input id="honour" name="honour" type="text" value="{{user.information.honour}}">
+                </div>
+            </div>
+        </div>
+        <blockquote class="byr-blockquote">备注</blockquote>
+        <div class="byr-form-table">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="comments">邮子心声</label>
+                </div>
+                <div class="col-md-10">
+                    <div class="byr-form-textarea">
+                        <textarea id="comments" name="comments"
+                                  placeholder="写点最想给北邮说的悄悄话">{{user.information.remark}}</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="byr-form-table">
+            <div class="row">
+                <!--            <div class="col-md-12">-->
+                <div class="byr-btn-g">
+                    <button class="byr-form-btn" id='_submit' type="submit">编辑/提交</button>
+                </div>
+                <!--            </div>-->
+            </div>
+        </div>
+    </form>
+</div>
+<script src="js/app.js" type="text/javascript"></script>
+</div>
+<script type="text/javascript">
+        document.getElementById('_submit').addEventListener('click', ev => {
+            ev.preventDefault()
+            const form = collectForm()
+            const form_ = validateForm(validators, form)
+            if (isOk(form_)) {
+                //alert("Okay!")
+                //fetch("https://baidu.com")
+                var form_my = document.getElementById("form_id");
+                form_my.submit();
+            } else {
+                alert(flat(form_))
+            }
+        })
+
+
+</script>
+</body>
+
+</html>

@@ -36,8 +36,9 @@ class SchoolFellow(models.Model):
 
 
 class Account(AbstractUser):
-    information = models.ForeignKey(verbose_name="所关联的详细个人信息", to=SchoolFellow, on_delete=models.CASCADE, default=None,
-                                    null=True)
+    information = models.OneToOneField(verbose_name="所关联的详细个人信息", to=SchoolFellow, on_delete=models.CASCADE,
+                                       default=None,
+                                       null=True)
 
     def __str__(self):
         return self.username

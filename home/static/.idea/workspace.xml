@@ -28,6 +28,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -37,12 +38,19 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/icon" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Font-Project\Code\校友信息登记系统\icon" />
       <recent name="G:\Font-Project\Code\校友信息登记系统" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Font-Project\Code\校友信息登记系统\表单界面" />
+      <recent name="G:\Font-Project\Code\校友信息登记系统\登录注册页面" />
+      <recent name="G:\Font-Project\Code\校友信息登记系统\images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -92,6 +100,25 @@
       <workItem from="1574923731748" duration="133000" />
       <workItem from="1574923916882" duration="1357000" />
       <workItem from="1574951959357" duration="1511000" />
+      <workItem from="1574953646673" duration="334000" />
+      <workItem from="1574954161055" duration="125000" />
+      <workItem from="1574997084620" duration="1223000" />
+      <workItem from="1575018763972" duration="20000" />
+      <workItem from="1575260373235" duration="6395000" />
+      <workItem from="1575269185723" duration="5135000" />
+      <workItem from="1575275063229" duration="3012000" />
+      <workItem from="1575278123661" duration="123000" />
+      <workItem from="1575278326724" duration="255000" />
+      <workItem from="1575278599599" duration="1154000" />
+      <workItem from="1575282308804" duration="778000" />
+      <workItem from="1575296419640" duration="7483000" />
+      <workItem from="1575304105430" duration="772000" />
+      <workItem from="1575328708833" duration="847000" />
+      <workItem from="1575331451857" duration="8590000" />
+      <workItem from="1575340212635" duration="279000" />
+      <workItem from="1575342528444" duration="121000" />
+      <workItem from="1575342845064" duration="27000" />
+      <workItem from="1575342953013" duration="995000" />
     </task>
     <servers />
   </component>

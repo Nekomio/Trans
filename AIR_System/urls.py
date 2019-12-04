@@ -18,7 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('back/',include('back_stage.urls')),
-    path('user/', include('home.urls')),
-    # path('get_excel/',views.logout),
+    path('', include('home.urls')),
 ]

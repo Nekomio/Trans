@@ -32,15 +32,22 @@ class SchoolFellowAdmin(admin.ModelAdmin):
     list_display = ['name', 'sex', 'tell', 'fixed_tell', 'email', 'department', 'school_class', 'education',
                     'year_system', 'year_enroll', 'year_graduate', 'teacher', 'mentor', 'current_work_unit',
                     'address_work_unit', 'industry_category', 'unit_property', 'current_job_title', 'honour', 'remark']
-    list_filter = list_display
+    list_filter = ['sex', 'department', 'education', 'year_system', 'year_enroll', 'year_graduate', 'industry_category',
+                   'unit_property', ]
     search_fields = list_display
-    # fields = list_display
 
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ['username', 'information']
-    empty_value_display = "超级用户没有关联的详细个人信息"
+    list_display = ['username', '所关联的详细个人信息']
+
+    def 所关联的详细个人信息(self, obj):
+        if obj.is_staff:
+            return "超级用户没有关联的详细个人信息"
+        else:
+            return obj.information
+
+    list_display_links = ['username', '所关联的详细个人信息']
 
 
 admin.site.site_header = "校友信息填报系统__后台管理"
