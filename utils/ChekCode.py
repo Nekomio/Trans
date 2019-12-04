@@ -1,12 +1,16 @@
+import os
 import random
 import string
 
 from PIL import Image, ImageFont, ImageDraw, ImageFilter
 
+from AIR_System.settings import BASE_DIR
+
 
 class CheckCode():
     def __init__(self):
-        self.font_path = 'timesbi.ttf'
+        self.font_path = os.path.join(BASE_DIR, "utils", "timesbi.ttf")
+        print(self.font_path)
         self.number = 4
         self.size = (100, 30)
         self.backgroundcolor = (255, 255, 255)
