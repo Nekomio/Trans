@@ -37,10 +37,7 @@
                 /*去掉safari默认内阴影的渲染*/
                 -webkit-appearance: none;
                 padding-left: 10px;
-            }
-            input[id="byr-form-checkcode"]{
-                width:66%;
-                margin-left:0px;
+                margin:0;
             }
             .byr-nav-img {
                 display: flow;
@@ -60,6 +57,7 @@
             .byr-btn {
                 cursor: pointer;
                 margin: 7px;
+                margin-left:15px;
                 color: #FFFFFF;
                 font-size: 16px;
                 background-color: #7f2e1c;
@@ -92,7 +90,12 @@
                 text-align: center;
                 padding: 6px 12px;
                 font-size:22px;
+                display: block;
+            }
+            .byr-form-msg{
                 display: inline-block;
+                color:red;
+                display: none;
             }
         }
         @media(min-width: 968px){
@@ -112,12 +115,12 @@
     <meta content="北京邮电大学" name="author">
     <meta content="width=device-width,initial-width=1.0,min-width=1.0,max-width=3.0,shrink-to-fit=no" name="viewport">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>校友信息填报系统</title>
 </head>
 <body>
 <header>
     <div class="byr-nav">
-        <img alt="Nav" class="byr-nav-img" height="65px" id="nav" src="images/navbaruse.png" width="100%">
+        <img alt="Nav" class="byr-nav-img" id="nav" src="images/navbaruse.png" width="100%" width="100%">
         <script>
             var navbar = document.getElementById("nav");
             if (window.outerWidth < 650) {
@@ -130,6 +133,9 @@
 <div class="byr-main">
     <div class="byr-main-shadow">
         <h3 class="byr-form-title">校友信息系统</h3>
+        <text class="byr-form-msg">
+
+        </text>
         <div class="byr-form">
             <form action="/register/create" method="POST" target="_self">
                 {% csrf_token %}
@@ -139,8 +145,8 @@
                             <img class="byr-i" src="icon/1b.png">
                         </td>
                         <td colspan="2">
-                            <input class="byr-form-text" name="username" placeholder="邮箱"
-                                   type="text" value="{{name}}">
+                            <input class="byr-form-text" name="username" onblur="che(this)"
+                                   placeholder="邮箱" type="text" value="{{name}}">
                         </td>
                     </tr>
                     <tr>
@@ -148,23 +154,23 @@
                             <img class="byr-i" src="icon/2b.png">
                         </td>
                         <td>
-                            <input class="byr-form-text" name="password" placeholder="密码"
-                                   type="password" value="{{password}}">
+                            <input class="byr-form-text" name="password" onblur="chp(this)"
+                                   placeholder="密码" style="width:101.2%" type="password" value="{{password}}">
                         </td>
                     <tr>
                         <td>
                             <img class="byr-i" src="icon/3b.png">
                         </td>
                         <td colspan="2">
-                            <input class="byr-form-text" name="checkpassword"
-                                   placeholder="确认密码" type="password">
+                            <input class="byr-form-text" name="checkpassword" onblur="chpa(this)" placeholder="确认密码"
+                                   type="password">
                         </td>
                     </tr>
                     <td>
                         <img class="byr-i" src="icon/4b.png">
                     </td>
                     <td colspan="2">
-                        <img src="{{passcode_src}}">
+                        <img src="{{passcode_src}}?{{version}}">
                     </td>
                     </tr>
                     <tr>
@@ -174,14 +180,13 @@
                         <td colspan="2">
                             <input id="byr-form-checkcode" name="passcode" placeholder="验证码"
                                    type="text">
-                            <font>验证码</font>
                         </td>
                     </tr>
                     <text class="color:red">{{error_msg}}</text>
                 </table>
                 <div class="byr-btn-g">
                     <!--                    注释:formaction指向不同的处理-->
-                    <button class="byr-btn">注册并登录</button>
+                    <button class="byr-btn" onclick="functiona()">注册并登录</button>
                 </div>
             </form>
         </div>
@@ -191,4 +196,6 @@
     </div>
 </div>
 </body>
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/sign.js"></script>
 </html>

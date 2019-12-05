@@ -40,14 +40,18 @@ class SchoolFellowAdmin(admin.ModelAdmin):
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
     list_display = ['username', '所关联的详细个人信息']
+    exclude = ('information',)
+    list_display_links = ['username', '所关联的详细个人信息']
+    list_filter = ['is_staff', 'is_superuser']
 
     def 所关联的详细个人信息(self, obj):
-        if obj.is_staff:
-            return "超级用户没有关联的详细个人信息"
-        else:
+        if not obj.is_staff:
             return obj.information
-
-    list_display_links = ['username', '所关联的详细个人信息']
+        else:
+            if obj.is_superuser:
+                return "超级用户没有关联的详细个人信息"
+            else:
+                return "普通管理员没有关联的详细个人信息"
 
 
 admin.site.site_header = "校友信息填报系统__后台管理"

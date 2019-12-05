@@ -26,6 +26,38 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'home.Account'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '[{asctime}]{levelname}{message}',
+            'style': '{',
+        },
+
+    },
+    'handlers': {
+        'file_debug': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, "debug.log"),
+            'formatter': 'standard'
+        },
+        'file_error': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'error.log'),
+            'formatter': 'standard',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file_debug', 'file_error'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 STATIC_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
 # Application definition

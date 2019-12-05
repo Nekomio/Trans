@@ -13,16 +13,24 @@ from AIR_System.settings import STATIC_ROOT
 from config import fields
 from home.models import Account, SchoolFellow
 from utils.ChekCode import CheckCode
+from time import time
 
 Obj_code = CheckCode()
+Obj_code.isTwist = True
+Obj_code.line_count = 15
+
+
+def get_path(img_name):
+    check_code_dir = "check_code"
+    src = "%s/%s" % (check_code_dir, img_name)
+    return src, os.path.join(STATIC_ROOT, os.path.join(check_code_dir), img_name)
 
 
 def register(request):
-    resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': ""}
+    resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': "", 'version': time()}
     session_key = str(hash(request.META['REMOTE_ADDR']))
-    src = "%s.png" % session_key
-    resp['passcode_src'] = src
-    path = os.path.join(STATIC_ROOT, src)
+    img_name = "%s.png" % session_key
+    resp['passcode_src'], path = get_path(img_name)
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -62,11 +70,10 @@ def register(request):
 
 
 def login(request):
-    resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': ""}
+    resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': "", 'version': time()}
     session_key = str(hash(request.META['REMOTE_ADDR']))
-    src = "%s.png" % session_key
-    resp['passcode_src'] = src
-    path = os.path.join(STATIC_ROOT, src)
+    img_name = "%s.png" % session_key
+    resp['passcode_src'], path = get_path(img_name)
     if request.method == "POST":
         print("has printed：post:", request.POST)
         username = request.POST['username']
@@ -141,6 +148,7 @@ def information_filling(request):
         }
         information.name = dic['name']
         information.tell = dic['tell']
+        information.fixed_tell = dic['fixed_tell']
         information.sex = switch[dic['sex']]
         information.email = dic['email']
         information.department = dic['department']

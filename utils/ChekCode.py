@@ -17,6 +17,7 @@ class CheckCode():
         self.fontcolor = (0, 0, 255)
         self.linecolor = (255, 0, 0)
         self.draw_line = True
+        self.isTwist = True
         self.line_count = 20
         self.text = ''
 
@@ -43,7 +44,9 @@ class CheckCode():
         if self.draw_line:
             for i in range(self.line_count):
                 self._gene_line(width, height, draw)
-        img = img.transform((width + 20, height + 10), Image.AFFINE, (1, -0.3, 0, -0.1, 1, 0), Image.BILINEAR)
+        if self.isTwist:
+            img = img.transform((width + 20, height + 10), Image.AFFINE, (1, -0.3, 0, -0.1, 1, 0), Image.BILINEAR)
+        # this is for make the picture shows fuzzy.
         img = img.filter(ImageFilter.EDGE_ENHANCE_MORE)
         img.save(imagename)
         return self.text
