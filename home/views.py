@@ -179,10 +179,9 @@ def information_filling(request):
         return render(request, 'form.html', resp)
 
 
-# @permission_required(perm="")
+@permission_required(perm="home.view_schoolfellow", login_url="user.login", raise_exception=True)
 @login_required(login_url="user.login")
 def get_excel(request):
-    if request.user.is_superuser:
         fellows = SchoolFellow.objects.order_by('name')
         ws = Workbook(encoding="utf-8")
         w = ws.add_sheet(u"校友信息导出表")
@@ -219,5 +218,3 @@ def get_excel(request):
         sio.close()
         res['Content-Disposition'] = 'attachment;filename = school_fellow_information_export_table.xls'
         return res
-    else:
-        return HttpResponse("Permission denied.")
