@@ -41,6 +41,7 @@ def register(request):
                     # 添加一些权限
 
                     #
+                    os.remove(path)
                     resp['error_msg'] = "注册成功"
                     auth.login(request, user)
                     return redirect(to="user.information")
@@ -81,6 +82,7 @@ def login(request):
                 if account:
                     if account.is_active:
                         auth.login(request, account)
+                        os.remove(path)
                         return redirect(to="user.information")
                     else:
                         resp['error_msg'] = "the account is not active."
