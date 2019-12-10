@@ -16,7 +16,7 @@ from utils.ChekCode import CheckCode
 from time import time
 
 Obj_code = CheckCode()
-Obj_code.isTwist = True
+Obj_code.isTwist = False
 Obj_code.line_count = 15
 
 
@@ -27,6 +27,7 @@ def get_path(img_name):
 
 
 def register(request):
+    print(request.POST)
     resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': "", 'version': time()}
     session_key = str(hash(request.META['REMOTE_ADDR']))
     img_name = "%s.png" % session_key
@@ -57,6 +58,7 @@ def register(request):
                 resp['error_msg'] = '用户名或密码不能为空，请正确输入'
         resp['name'] = username
         resp['password'] = password
+        resp['checkpassword'] = request.POST['checkpassword']
         passcode = Obj_code.gene_code(path)
         print(session_key, passcode)
         request.session[session_key] = passcode
@@ -155,8 +157,8 @@ def information_filling(request):
         information.school_class = dic['class']
         information.education = switch1[dic['education']]
         information.year_system = dic['year']
-        information.year_enroll = datetime.strptime(dic['start'], "%Y-%m-%d")
-        information.year_graduate = datetime.strptime(dic['graduate'], "%Y-%m-%d")
+        information.year_enroll = int(dic['startdate'])
+        information.year_graduate = int(dic['date2'])
         try:
             information.teacher = dic['teacher']
         except:
@@ -173,10 +175,7 @@ def information_filling(request):
         request.user.save()
         return render(request, 'after_form.html')
     if request.method == "GET":
-        resp = {}
-        if information:
-            resp = {'year_enroll': str(information.year_enroll), 'year_graduate': str(information.year_graduate)}
-        return render(request, 'form.html', resp)
+        return render(request, 'form.html')
 
 
 @permission_required(perm="home.view_schoolfellow", login_url="user.login", raise_exception=True)
@@ -200,8 +199,8 @@ def get_excel(request):
             w.write(i + 1, 7, fellows[i].education)
             w.write(i + 1, 8, fellows[i].year_system)
             # x = datetime.strftime(fellows[i].入学年份, '%Y-%m-%d')
-            w.write(i + 1, 9, fellows[i].year_enroll, date_format)
-            w.write(i + 1, 10, fellows[i].year_graduate, date_format)
+            w.write(i + 1, 9, fellows[i].year_enroll)
+            w.write(i + 1, 10, fellows[i].year_graduate)
             w.write(i + 1, 11, fellows[i].teacher)
             w.write(i + 1, 12, fellows[i].mentor)
             w.write(i + 1, 13, fellows[i].current_work_unit)

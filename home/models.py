@@ -15,8 +15,8 @@ class SchoolFellow(models.Model):
     school_class = models.CharField(max_length=30, null=True, verbose_name=fields[6])
     education = models.CharField(max_length=50, null=False, verbose_name=fields[7])
     year_system = models.CharField(max_length=30, null=True, verbose_name=fields[8])
-    year_enroll = models.DateField(null=False, verbose_name=fields[9])
-    year_graduate = models.DateField(null=False, verbose_name=fields[10])
+    year_enroll = models.IntegerField(null=False, verbose_name=fields[9])
+    year_graduate = models.IntegerField(null=False, verbose_name=fields[10])
     teacher = models.CharField(max_length=40, null=True, verbose_name=fields[11])
     mentor = models.CharField(max_length=40, null=True, verbose_name=fields[12])
     current_work_unit = models.CharField(max_length=100, null=False, verbose_name=fields[13])
@@ -36,9 +36,8 @@ class SchoolFellow(models.Model):
 
 
 class Account(AbstractUser):
-    information = models.ForeignKey(verbose_name="所关联的详细个人信息", to=SchoolFellow, on_delete=models.CASCADE,
-                                    default=None,
-                                    null=True)
+    information = models.OneToOneField(verbose_name="所关联的详细个人信息", to=SchoolFellow, on_delete=models.CASCADE, null=True,
+                                       default=None)
 
     def __str__(self):
         return self.username

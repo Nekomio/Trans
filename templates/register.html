@@ -163,14 +163,16 @@
                         </td>
                         <td colspan="2">
                             <input class="byr-form-text" name="checkpassword" onblur="chpa(this)" placeholder="确认密码"
-                                   type="password">
+                                   type="password" value="{{checkpassword}}">
                         </td>
                     </tr>
                     <td>
                         <img class="byr-i" src="icon/4b.png">
                     </td>
                     <td colspan="2">
-                        <img src="{{passcode_src}}?{{version}}">
+                        <button type="submit">
+                            <img src="{{passcode_src}}?{{version}}">
+                        </button>
                     </td>
                     </tr>
                     <tr>
@@ -197,5 +199,5 @@
 </div>
 </body>
 <script src="js/jquery-3.3.1.js"></script>
-<script src="js/sign.js"></script>
+<script src="js/signup.js"></script>
 </html>

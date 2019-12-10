@@ -1,7 +1,7 @@
 collectForm = () => {
     fields = ['name', 'sex', 'phone', 'cellPhone',
         'email', 'department', 'class', 'education',
-        'year', 'start', 'graduate', 'teacher',
+        'year', 'startdate', 'enddate', 'teacher',
         'workplace', 'address', 'category',
         'property', 'title', 'honour', 'comments'
     ]

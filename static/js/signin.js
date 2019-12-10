@@ -24,16 +24,6 @@ function chp(e) {
         return false;
     }
 }
-function chpa(e){
-    let password=document.getElementsByName("password")[0];
-    if(!e===password){
-        $(msg).show();
-        msg.innerHTML="两次密码输入不一致";
-        return false;
-    }else{
-        return true;
-    }
-}
 function functiona(){
     //后端先校验验证码:
     let checkcode=document.getElementById("byr-form-checkcode").value;

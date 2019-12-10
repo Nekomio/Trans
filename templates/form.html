@@ -13,7 +13,12 @@
             white-space: nowrap;
             color: black;
         }
-        
+
+        [id="form-textarea"] {
+            padding-left: 0px;
+            padding-right: 0;
+        }
+
         .byr-main {
             margin: 20px 40px;
             padding-top: 25px;
@@ -105,6 +110,7 @@
             position: relative;
             display: flow;
             width: 100%;
+            height: 100px;
             /*border:solid 1px darkorange;*/
             padding-top: 0.325em;
             padding-bottom: 0.325em;
@@ -219,6 +225,7 @@
         }
 
 
+
     </style>
     <meta content="width=device-width,initial-width=1.0,minimum-width=1.0,maximum-width=3.0,shrink-to-fit=no"
           name="viewport">
@@ -324,21 +331,6 @@
                         <option value="1">本科生</option>
                         <option value="2">硕士研究生</option>
                         <option value="3">博士生</option>
-                        <!--                         {% if user.information.education == '本科生' %}-->
-                        <!--                            <option selected='true' value="1">本科生</option>-->
-                        <!--                        {% else %}-->
-                        <!--                            <option value="1">本科生</option>-->
-                        <!--                        {% endif %}-->
-                        <!--                         {% if user.information.education == '硕士研究生' %}-->
-                        <!--                            <option selected='true' value="1">硕士研究生</option>-->
-                        <!--                        {% else %}-->
-                        <!--                            <option value="1">硕士研究生</option>-->
-                        <!--                        {% endif %}-->
-                        <!--                         {% if user.information.education == '博士生' %}-->
-                        <!--                            <option selected='true' value="1">博士生</option>-->
-                        <!--                        {% else %}-->
-                        <!--                            <option value="1">博士生</option>-->
-                        <!--                        {% endif %}-->
                     </select>
                 </div>
                 <div class="col-md-2">
@@ -351,19 +343,31 @@
             </div>
             <div class="row">
                 <div class="col-md-2">
-                    <label class="byr-form-required" for="start">入学年份</label>
+                    <label class="byr-form-required" for="startdate">入学年份</label>
                 </div>
                 <div class="col-md-4">
-                    <input id="start" name="start" type="date" value="{{year_enroll}}">
+                    <select id="startdate" name="startdate">
+                        <option value="0">请选择入学年份</option>
+                    </select>
                 </div>
                 <div class="col-md-2">
-                    <label class="byr-form-required" for="graduate">毕业年份</label>
+                    <label class="byr-form-required" for="enddate">毕业年份</label>
                 </div>
                 <div class="col-md-4">
-                    <input id="graduate" name="graduate" type="date" value="{{year_graduate}}">
+                    <select id="enddate" name="date2">
+                        <option value="0">请选择毕业年份</option>
+                    </select>
                     <!--                认怂,这里不再追求本科生的地方也触发onchange,而是把hidden去掉-->
                 </div>
             </div>
+            <script>
+                window.onload = function () {
+                }
+
+
+
+
+            </script>
             <div class="row">
                 <div class="col-md-2">
                     <label for="teacher" id="teacher-label">印象最深的教授或导员</label>
@@ -392,6 +396,7 @@
                         }
                     }
                 }
+
 
 
         </script>
@@ -453,7 +458,7 @@
                         var category = ['请选择','机关','事业单位','企业','其他'];
                         var education_list = ['本科生','硕士研究生','博士生']
                         window.onload = function(){
-                            console.log("ok");
+                            console.log("beaches.");
                             industry_category = document.getElementById("category");
                             for(i=0;i<industry_category.options.length;++i){
                                 if(category[i] == "{{user.information.industry_category}}"){
@@ -467,8 +472,46 @@
                                     education.options[i].selected = true
                                 }
                             }
-                            
+
+                            let startdate = document.getElementById("startdate");
+                            let enddate = document.getElementById("enddate");
+                            let date = new Date().getFullYear();
+                            console.log("success.");
+                            for (let i = 1955; i < date-4; i++) {
+                                let option = document.createElement("option");
+                                let end = document.createElement("option");
+                                console.log("innerdate");
+
+                                option.innerHTML = `<option value="${i - 1992}">${i}</option>`;
+                                end.innerHTML = `<option value="${i - 1992}">${i + 4}</option>`;
+
+                                enddate.add(end, null);
+                                startdate.add(option, null);
+                            }
+
+                            if("{{user.information.year_enroll}}"!=""){
+                                for(i =0;i<startdate.options.length;i++){
+                                    console.log((1954+i).toString());
+                                    console.log((1954+i).toString()=="{{user.information.year_enroll}}");
+                                    if((1954+i).toString()=="{{user.information.year_enroll}}"){
+                                        console.log("可以了");
+                                        startdate.options[i].selected = true;
+                                    }
+                                }
+                            }
+                            if("{{user.information.year_graduate}}"!=""){
+                                for(i =0;i<enddate.options.length;i++){
+                                    console.log((1954+i).toString());
+                                    console.log((1959+i).toString()=="{{user.information.year_graduate}}");
+                                    if((1954+i).toString()=="{{user.information.year_graduate}}"){
+                                        console.log("可以了");
+                                        enddate.options[i].selected = true;
+                                    }
+                                }
+                            }
+
                          }
+
 
 
 
@@ -526,12 +569,12 @@
         <div class="byr-form-table">
             <div class="row">
                 <div class="col-md-2">
-                    <label for="comments">邮子心声</label>
+                    <label for="comments">备注</label>
                 </div>
                 <div class="col-md-10">
                     <div class="byr-form-textarea">
                         <textarea id="comments" name="comments"
-                                  placeholder="写点最想给北邮说的悄悄话">{{user.information.remark}}</textarea>
+                                  placeholder="此处填写备注">{{user.information.remark}}</textarea>
                     </div>
                 </div>
             </div>
@@ -563,6 +606,7 @@
                 alert(flat(form_))
             }
         })
+
 
 
 </script>

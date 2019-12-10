@@ -25,18 +25,22 @@ function chp(e) {
     }
 }
 function chpa(e){
+    // alert(e.value);
     let password=document.getElementsByName("password")[0];
-    if(!e===password){
+    // alert(password.value);
+
+    if(e.value!==password.value){
         $(msg).show();
         msg.innerHTML="两次密码输入不一致";
         return false;
     }else{
+        $(msg).hide();
         return true;
     }
 }
 function functiona(){
-    //后端先校验验证码:
+    //后端校验验证码:
     let checkcode=document.getElementById("byr-form-checkcode").value;
-    //不行时阻止提交表单:
-    return che()&&chp();
+    //不行时阻止提交:
+    return che()&&chp()&&chpa();
 }
