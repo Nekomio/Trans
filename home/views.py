@@ -165,8 +165,14 @@ def information_filling(request):
             information.mentor = dic['mentor']
         information.current_work_unit = dic['workplace']
         information.address_work_unit = dic['address']
-        information.industry_category = switch2[dic['category']]
-        information.unit_property = dic['property']
+        try:
+            information.industry_category = switch2[dic['category']]
+        except:
+            print("this user has not choose  the  correct industry category.")
+        try:
+            information.unit_property = dic['property']
+        except:
+            print("this user has not choose a correct unit_property")
         information.current_job_title = dic['title']
         information.honour = dic['honour']
         information.remark = dic['comments']

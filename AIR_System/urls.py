@@ -27,22 +27,21 @@ urlpatterns = [
     url('^static/(?P<path>.*)$', static.serve, {'document_root': STATIC_ROOT}, name='static')
 ]
 
-
-def page_not_found_404(request, status):
-    print(status)
-    return render(request, "my_404.html", status=404)
-
-
-def page_not_found_403(request, status):
-    print(status)
-    return render(request, "my_403.html", status=403)
-
-
-def page_not_found_500(request):
-    # print(status)
-    return render(request, "my_404.html", status=500)
-
-
-handler404 = page_not_found_404
-handler500 = page_not_found_500
-handler403 = page_not_found_403
+# def page_not_found_404(request, status):
+#     print(status)
+#     return render(request, "my_404.html", status=404)
+#
+#
+# def page_not_found_403(request, status):
+#     print(status)
+#     return render(request, "my_403.html", status=403)
+#
+#
+# def page_not_found_500(request):
+#     print(status)
+# return render(request, "my_404.html", status=500)
+#
+#
+# handler404 = page_not_found_404
+# handler500 = page_not_found_500
+# handler403 = page_not_found_403
