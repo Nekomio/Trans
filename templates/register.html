@@ -137,7 +137,7 @@
 
         </text>
         <div class="byr-form">
-            <form action="/register/create" method="POST" target="_self">
+            <form action="/register/create" id="id_form_register" method="POST" target="_self">
                 {% csrf_token %}
                 <table class="byr-form-table">
                     <tr>
@@ -170,9 +170,18 @@
                         <img class="byr-i" src="icon/4b.png">
                     </td>
                     <td colspan="2">
-                        <button type="submit">
-                            <img src="{{passcode_src}}?{{version}}">
-                        </button>
+                        <img onclick="refresh_pass_code()" src="{{passcode_src}}">
+                        <script>
+                                function refresh_pass_code(){
+                                    console.log("refreshment");
+                                    var form = document.getElementById("id_form_register");
+                                    form.submit();
+                                    return true;
+
+                                }
+
+
+                        </script>
                     </td>
                     </tr>
                     <tr>

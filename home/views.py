@@ -1,6 +1,6 @@
 import os
-from datetime import datetime
 from io import BytesIO
+from time import time
 
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required, permission_required
@@ -13,7 +13,6 @@ from AIR_System.settings import STATIC_ROOT
 from config import fields
 from home.models import Account, SchoolFellow
 from utils.ChekCode import CheckCode
-from time import time
 
 Obj_code = CheckCode()
 Obj_code.isTwist = False
@@ -30,8 +29,6 @@ def register(request):
     print(request.POST)
     resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': "", 'version': time()}
     session_key = str(hash(request.META['REMOTE_ADDR']))
-    img_name = "%s.png" % session_key
-    resp['passcode_src'], path = get_path(img_name)
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -50,7 +47,6 @@ def register(request):
                     # 添加一些权限
 
                     #
-                    os.remove(path)
                     resp['error_msg'] = "注册成功"
                     auth.login(request, user)
                     return redirect(to="user.information")
@@ -59,29 +55,29 @@ def register(request):
         resp['name'] = username
         resp['password'] = password
         resp['checkpassword'] = request.POST['checkpassword']
-        passcode = Obj_code.gene_code(path)
+        pass_code, pass_code_base64 = Obj_code.get_pass_code_base64()
+        resp['passcode_src'] = pass_code_base64
         print(session_key, passcode)
         request.session[session_key] = passcode
         return render(request, 'register.html', resp)
 
     if request.method == "GET":
-        passcode = Obj_code.gene_code(path)
-        print(session_key, passcode)
-        request.session[session_key] = passcode
+        pass_code, pass_code_base64 = Obj_code.get_pass_code_base64()
+        resp['passcode_src'] = pass_code_base64
+        print(session_key, pass_code)
+        request.session[session_key] = pass_code
         return render(request, 'register.html', resp)
 
 
 def login(request):
     resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': "", 'version': time()}
     session_key = str(hash(request.META['REMOTE_ADDR']))
-    img_name = "%s.png" % session_key
-    resp['passcode_src'], path = get_path(img_name)
     if request.method == "POST":
         print("has printed：post:", request.POST)
         username = request.POST['username']
         password = request.POST['password']
-        passcode = request.POST['passcode']
-        if request.session[session_key] != passcode:
+        pass_code = request.POST['passcode']
+        if request.session[session_key] != pass_code:
             resp['error_msg'] = "验证码不匹配"
         else:
             print(username, password)
@@ -91,7 +87,6 @@ def login(request):
                 if account:
                     if account.is_active:
                         auth.login(request, account)
-                        os.remove(path)
                         return redirect(to="user.information")
                     else:
                         resp['error_msg'] = "the account is not active."
@@ -99,21 +94,25 @@ def login(request):
                     resp['error_msg'] = "密码错误"
             else:
                 resp['error_msg'] = "用户不存在"
-        passcode = Obj_code.gene_code(path)
-        print(session_key, passcode)
-        request.session[session_key] = passcode
+        pass_code, pass_code_base64 = Obj_code.get_pass_code_base64()
+        print(session_key, pass_code)
+        request.session[session_key] = pass_code
         resp['name'] = username
         resp['password'] = password
+        resp['passcode_src'] = pass_code_base64
         return render(request, 'login.html', resp)
         # users = Account.objects.get_by_natural_key(username=username)
         # user = auth.authenticate(request,username=username,password=password)
         # print(user)
         # print(users)
+
     if request.method == "GET":
         # print("has printed GET:", request.GET)
-        passcode = Obj_code.gene_code(path)
-        print(session_key, passcode)
-        request.session[session_key] = passcode
+
+        pass_code, pass_code_base64 = Obj_code.get_pass_code_base64()
+        resp['passcode_src'] = pass_code_base64
+        print(session_key, pass_code)
+        request.session[session_key] = pass_code
         return render(request, "login.html", resp)
 
 
@@ -187,39 +186,39 @@ def information_filling(request):
 @permission_required(perm="home.view_schoolfellow", login_url="user.login", raise_exception=True)
 @login_required(login_url="user.login")
 def get_excel(request):
-        fellows = SchoolFellow.objects.order_by('name')
-        ws = Workbook(encoding="utf-8")
-        w = ws.add_sheet(u"校友信息导出表")
-        for i in fields:
-            w.write(0, fields.index(i), i)
-        date_format = XFStyle()
-        date_format.num_format_str = 'yyyy-mm-dd'
-        for i in range(len(fellows)):
-            w.write(i + 1, 0, fellows[i].name)
-            w.write(i + 1, 1, fellows[i].sex)
-            w.write(i + 1, 2, fellows[i].tell)
-            w.write(i + 1, 3, fellows[i].fixed_tell)
-            w.write(i + 1, 4, fellows[i].email)
-            w.write(i + 1, 5, fellows[i].department)
-            w.write(i + 1, 6, fellows[i].school_class)
-            w.write(i + 1, 7, fellows[i].education)
-            w.write(i + 1, 8, fellows[i].year_system)
-            # x = datetime.strftime(fellows[i].入学年份, '%Y-%m-%d')
-            w.write(i + 1, 9, fellows[i].year_enroll)
-            w.write(i + 1, 10, fellows[i].year_graduate)
-            w.write(i + 1, 11, fellows[i].teacher)
-            w.write(i + 1, 12, fellows[i].mentor)
-            w.write(i + 1, 13, fellows[i].current_work_unit)
-            w.write(i + 1, 14, fellows[i].address_work_unit)
-            w.write(i + 1, 15, fellows[i].industry_category)
-            w.write(i + 1, 16, fellows[i].unit_property)
-            w.write(i + 1, 17, fellows[i].current_job_title)
-            w.write(i + 1, 18, fellows[i].honour)
-            w.write(i + 1, 19, fellows[i].remark)
-        sio = BytesIO()
-        ws.save(sio)
-        sio.seek(0)
-        res = HttpResponse(sio.getvalue(), content_type="application/vnd.ms-excel")
-        sio.close()
-        res['Content-Disposition'] = 'attachment;filename = school_fellow_information_export_table.xls'
-        return res
+    fellows = SchoolFellow.objects.order_by('name')
+    ws = Workbook(encoding="utf-8")
+    w = ws.add_sheet(u"校友信息导出表")
+    for i in fields:
+        w.write(0, fields.index(i), i)
+    date_format = XFStyle()
+    date_format.num_format_str = 'yyyy-mm-dd'
+    for i in range(len(fellows)):
+        w.write(i + 1, 0, fellows[i].name)
+        w.write(i + 1, 1, fellows[i].sex)
+        w.write(i + 1, 2, fellows[i].tell)
+        w.write(i + 1, 3, fellows[i].fixed_tell)
+        w.write(i + 1, 4, fellows[i].email)
+        w.write(i + 1, 5, fellows[i].department)
+        w.write(i + 1, 6, fellows[i].school_class)
+        w.write(i + 1, 7, fellows[i].education)
+        w.write(i + 1, 8, fellows[i].year_system)
+        # x = datetime.strftime(fellows[i].入学年份, '%Y-%m-%d')
+        w.write(i + 1, 9, fellows[i].year_enroll)
+        w.write(i + 1, 10, fellows[i].year_graduate)
+        w.write(i + 1, 11, fellows[i].teacher)
+        w.write(i + 1, 12, fellows[i].mentor)
+        w.write(i + 1, 13, fellows[i].current_work_unit)
+        w.write(i + 1, 14, fellows[i].address_work_unit)
+        w.write(i + 1, 15, fellows[i].industry_category)
+        w.write(i + 1, 16, fellows[i].unit_property)
+        w.write(i + 1, 17, fellows[i].current_job_title)
+        w.write(i + 1, 18, fellows[i].honour)
+        w.write(i + 1, 19, fellows[i].remark)
+    sio = BytesIO()
+    ws.save(sio)
+    sio.seek(0)
+    res = HttpResponse(sio.getvalue(), content_type="application/vnd.ms-excel")
+    sio.close()
+    res['Content-Disposition'] = 'attachment;filename = school_fellow_information_export_table.xls'
+    return res

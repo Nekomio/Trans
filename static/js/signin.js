@@ -1,4 +1,5 @@
 //checkcode在后端验证!
+//checkcode在后端验证!
 let a=/^\w{6,}$/;
 let b= /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
 let msg=document.getElementsByClassName("byr-form-msg")[0];

@@ -1,6 +1,8 @@
+import base64
 import os
 import random
 import string
+from io import BytesIO
 
 from PIL import Image, ImageFont, ImageDraw, ImageFilter
 
@@ -32,7 +34,7 @@ class CheckCode():
         end = (random.randint(0, width), random.randint(0, height))
         draw.line([begin, end], fill=self.linecolor)
 
-    def gene_code(self, imagename):
+    def gene_code(self, imagename_or_io, format):
         width, height = self.size
         img = Image.new("RGBA", (width, height), self.backgroundcolor)
         font = ImageFont.truetype(self.font_path, 25)
@@ -48,10 +50,22 @@ class CheckCode():
             img = img.transform((width + 20, height + 10), Image.AFFINE, (1, -0.3, 0, -0.1, 1, 0), Image.BILINEAR)
         # this is for make the picture shows fuzzy.
         img = img.filter(ImageFilter.EDGE_ENHANCE_MORE)
-        img.save(imagename)
+        if format:
+            img.save(imagename_or_io, format=format)
+            # print("saved to io%s"%io.getvalue().decode())
+        else:
+            img.save(imagename_or_io)
         return self.text
+
+    def get_pass_code_base64(self):
+        io = BytesIO()
+        pass_code = self.gene_code(io, format="PNG")
+        base64_data = base64.b64encode(io.getvalue())
+        io.close()
+        return pass_code, "data:image/png;base64,%s" % base64_data.decode()
 
 
 if __name__ == '__main__':
     code = CheckCode()
-    print(code.gene_code("x.png"))
+    # print(code.gene_code("x.png"))
+    # print(code.get_base64())
