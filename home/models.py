@@ -24,8 +24,8 @@ class SchoolFellow(models.Model):
     industry_category = models.CharField(max_length=20, null=True, verbose_name=fields[15])
     unit_property = models.CharField(max_length=30, null=True, verbose_name=fields[16])
     current_job_title = models.CharField(max_length=100, null=True, verbose_name=fields[17])
-    honour = models.TextField(null=True, verbose_name=fields[18])
-    remark = models.TextField(null=True, verbose_name=fields[19])
+    honour = models.TextField(blank=True, verbose_name=fields[18], default="无")
+    remark = models.TextField(blank=True, verbose_name=fields[19], default="无")
 
     class Meta:
         verbose_name = "校友"
