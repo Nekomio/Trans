@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 # Create your views here.
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.utils import timezone
 from xlwt import Workbook, XFStyle
 
 from AIR_System.settings import STATIC_ROOT
@@ -245,8 +246,10 @@ def information_filling(request):
         string_changed_fields = ""
         for i in last_change_list:
             string_changed_fields += i + "/"
-        information.last_changed_fields = string_changed_fields[:-1]
-        print(information.last_changed_fields)
+        if last_change_list.__len__() != 0:
+            information.last_changed_fields = string_changed_fields[:-1]
+            information.last_submit = timezone.now()
+            print("has changed the value of these fields:", information.last_changed_fields)
         information.save()
         request.user.information = information
         request.user.save()
