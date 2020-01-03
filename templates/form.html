@@ -376,7 +376,11 @@
                     {% if user.information.teacher %}
                     <input class="teacher" id="teacher" name="teacher" type="text" value="{{user.information.teacher}}">
                     {% else %}
+                    {% if user.information.mentor %}
                     <input class="teacher" id="teacher" name="teacher" type="text" value="{{user.information.mentor}}">
+                    {% else %}
+                    <input class="teacher" id="teacher" name="teacher" type="text">
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>
@@ -425,7 +429,10 @@
                     <label for="category">行业类别</label>
                 </div>
                 <div class="col-md-4">
-                    <script type="text/javascript">
+                    <select id="category" name="category" onchange="renderA(this.options.selectedIndex)">
+                        <!--                    两个空格使之看起来居中一些:-其实of no use-->
+                        <option value="0">请选择</option>
+                        <script type="text/javascript">
                         var a = [
                             ["此处随行业类别变化而变化"],
                             ["省级以上党政机关", "省级以下党政机关"],
@@ -491,20 +498,18 @@
 
                             if("{{user.information.year_enroll}}"!=""){
                                 for(i =0;i<startdate.options.length;i++){
-                                    console.log((1954+i).toString());
-                                    console.log((1954+i).toString()=="{{user.information.year_enroll}}");
+                                    console.log((1954+i).toString()+"=={{user.information.year_enroll}}");
                                     if((1954+i).toString()=="{{user.information.year_enroll}}"){
-                                        console.log("可以了");
+                                        console.log((1954+i).toString()=="{{user.information.year_enroll}}");
                                         startdate.options[i].selected = true;
                                     }
                                 }
                             }
                             if("{{user.information.year_graduate}}"!=""){
                                 for(i =0;i<enddate.options.length;i++){
-                                    console.log((1954+i).toString());
-                                    console.log((1959+i).toString()=="{{user.information.year_graduate}}");
-                                    if((1954+i).toString()=="{{user.information.year_graduate}}"){
-                                        console.log("可以了");
+                                    console.log((1958+i).toString()+"=={{user.information.year_graduate}}");
+                                    if((1958+i).toString()=="{{user.information.year_graduate}}"){
+                                        console.log((1958+i).toString()=="{{user.information.year_graduate}}");
                                         enddate.options[i].selected = true;
                                     }
                                 }
@@ -516,9 +521,6 @@
 
 
                     </script>
-                    <select id="category" name="category" onchange="renderA(this.options.selectedIndex)">
-                        <!--                    两个空格使之看起来居中一些:-其实of no use-->
-                        <option value="0">请选择</option>
                         {% if user.information.industry_category == '机关' %}
                         <option selected='true' value="1">机关</option>
                         {% else %}

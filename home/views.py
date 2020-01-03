@@ -141,12 +141,6 @@ def information_filling(request):
             "2": "硕士研究生",
             "3": "博士生",
         }
-        switch2 = {
-            "1": "机关",
-            "2": "事业单位",
-            "3": "企业",
-            "4": "其他",
-        }
         information.name = dic['name']
         information.tell = dic['tell']
         information.fixed_tell = dic['fixed_tell']
@@ -156,21 +150,39 @@ def information_filling(request):
         information.school_class = dic['class']
         information.education = switch1[dic['education']]
         information.year_system = dic['year']
-        information.year_enroll = int(dic['startdate'])
-        information.year_graduate = int(dic['date2'])
+
+        year_enroll_choose_index = int(dic['startdate'])
+        year_graduate_choose_index = int(dic['date2'])
+        if year_enroll_choose_index != 0:
+            information.year_enroll = year_enroll_choose_index
+        else:
+            # information.year_enroll = None
+            print(" has not choose the enroll year.")
+        if year_graduate_choose_index != 0:
+            information.year_graduate = year_graduate_choose_index
+        else:
+            # information.year_graduate = None
+            print("has not choose the graduate year.")
+
         try:
             information.teacher = dic['teacher']
         except:
             information.mentor = dic['mentor']
         information.current_work_unit = dic['workplace']
         information.address_work_unit = dic['address']
-        try:
-            information.industry_category = switch2[dic['category']]
-        except:
-            print("this user has not choose  the  correct industry category.")
-        try:
+
+        switch2 = {
+            "0": None,
+            "1": "机关",
+            "2": "事业单位",
+            "3": "企业",
+            "4": "其他",
+        }
+        information.industry_category = switch2[dic['category']]
+        if dic['property'] != "0" and dic['property'] != '此处随行业类别变化而变化':
             information.unit_property = dic['property']
-        except:
+        else:
+            information.unit_property = None
             print("this user has not choose a correct unit_property")
         information.current_job_title = dic['title']
         information.honour = dic['honour']

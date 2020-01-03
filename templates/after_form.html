@@ -363,14 +363,18 @@
                 </div>
                 <div class="col-md-4">
                     <!--                    <input id="start" name="start" type="date" value="{{year_enroll}}">-->
+                    {% if user.information.year_enroll %}
                     <label>{{user.information.year_enroll}}</label>
+                    {% endif %}
                 </div>
                 <div class="col-md-2">
                     <label class="byr-form-required" for="graduate">毕业年份</label>
                 </div>
                 <div class="col-md-4">
                     <!--                    <input id="graduate" name="graduate" type="date" value="{{year_graduate}}">-->
+                    {% if user.information.year_graduate %}
                     <label>{{user.information.year_graduate}}</label>
+                    {% endif %}
                     <!--                认怂,这里不再追求本科生的地方也触发onchange,而是把hidden去掉-->
                 </div>
             </div>
@@ -383,7 +387,9 @@
                     <label>{{user.information.teacher}}</label>
                     <!--                    <input class="teacher" id="teacher" name="teacher" type="text" value="{{user.information.teacher}}">-->
                     {% else %}
+                    {% if user.information.mentor %}
                     <label>{{user.information.mentor}}</label>
+                    {% endif %}
                     <!--                    <input class="teacher" id="teacher" name="teacher" type="text" value="{{user.information.mentor}}">-->
                     {% endif %}
                 </div>
@@ -511,7 +517,9 @@
                     <!--                        <option value="4">其他</option>-->
                     <!--                        {% endif %}-->
                     <!--                    </select>-->
+                    <!--                    {% if user.information.industry_category %}-->
                     <label>{{user.information.industry_category}}</label>
+                    <!--                    {% endif %}-->
                 </div>
                 <div class="col-md-2">
                     <label for="property">单位性质</label>
@@ -520,7 +528,9 @@
                     <!--                    <select id="property" name="property">-->
                     <!--                             <option value="0">此处随行业类别变化而变化</option>-->
                     <!--                         </select>-->
+                    {% if user.information.unit_property %}
                     <label>{{ user.information.unit_property}}</label>
+                    {% endif %}
                 </div>
             </div>
             <div class="row">

@@ -3,7 +3,6 @@ from datetime import date
 
 from django.contrib import admin
 
-from config import fields
 from home.models import SchoolFellow, Account
 
 
@@ -40,7 +39,7 @@ class SchoolFellowAdmin(admin.ModelAdmin):
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
     list_display = ['username', '所关联的详细个人信息']
-    exclude = ('information',)
+    # exclude = ('information',)
     list_display_links = ['username', '所关联的详细个人信息']
     list_filter = ['is_staff', 'is_superuser']
 
