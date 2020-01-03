@@ -26,6 +26,8 @@ class SchoolFellow(models.Model):
     current_job_title = models.CharField(max_length=100, blank=True, null=True, verbose_name=fields[17])
     honour = models.TextField(blank=True, verbose_name=fields[18], default="无")
     remark = models.TextField(blank=True, verbose_name=fields[19], default="无")
+    last_submit = models.DateTimeField(blank=True, verbose_name="上一次修改时间", auto_now=True)
+    last_changed_fields = models.TextField(verbose_name="修改项", blank=True)
 
     class Meta:
         verbose_name = "校友"

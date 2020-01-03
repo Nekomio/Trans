@@ -132,44 +132,85 @@ def information_filling(request):
         dic = request.POST
         if not information:
             information = SchoolFellow()
+
+        last_change_list = []
+        if information.name != dic['name']:
+            information.name = dic['name']
+            last_change_list.append(fields[0])
+
         switch = {
             '1': "男",
             "2": "女",
         }
+        if information.sex != switch[dic['sex']]:
+            information.sex = switch[dic['sex']]
+            last_change_list.append(fields[1])
+
+        if information.tell != dic['tell']:
+            information.tell = dic['tell']
+            last_change_list.append(fields[2])
+
+        if information.fixed_tell != dic['fixed_tell']:
+            information.fixed_tell = dic['fixed_tell']
+            last_change_list.append(fields[3])
+
+        if information.email != dic['email']:
+            information.email = dic['email']
+            last_change_list.append(fields[4])
+
+        if information.department != dic['department']:
+            information.department = dic['department']
+            last_change_list.append(fields[5])
+
+        if information.school_class != dic['class']:
+            information.school_class = dic['class']
+            last_change_list.append(fields[6])
+
         switch1 = {
             "1": "本科生",
             "2": "硕士研究生",
             "3": "博士生",
         }
-        information.name = dic['name']
-        information.tell = dic['tell']
-        information.fixed_tell = dic['fixed_tell']
-        information.sex = switch[dic['sex']]
-        information.email = dic['email']
-        information.department = dic['department']
-        information.school_class = dic['class']
-        information.education = switch1[dic['education']]
-        information.year_system = dic['year']
+        if information.education != switch1[dic['education']]:
+            information.education = switch1[dic['education']]
+            last_change_list.append(fields[7])
+
+        if information.year_system != dic['year']:
+            information.year_system = dic['year']
+            last_change_list.append(fields[8])
 
         year_enroll_choose_index = int(dic['startdate'])
-        year_graduate_choose_index = int(dic['date2'])
         if year_enroll_choose_index != 0:
-            information.year_enroll = year_enroll_choose_index
+            if information.year_enroll != year_enroll_choose_index:
+                information.year_enroll = year_enroll_choose_index
+                last_change_list.append(fields[9])
         else:
             # information.year_enroll = None
             print(" has not choose the enroll year.")
+
+        year_graduate_choose_index = int(dic['date2'])
         if year_graduate_choose_index != 0:
-            information.year_graduate = year_graduate_choose_index
+            if information.year_graduate != year_graduate_choose_index:
+                information.year_graduate = year_graduate_choose_index
+                last_change_list.append(fields[10])
         else:
             # information.year_graduate = None
             print("has not choose the graduate year.")
 
         try:
-            information.teacher = dic['teacher']
+            if information.teacher != dic['teacher']:
+                information.teacher = dic['teacher']
+                last_change_list.append(fields[11])
         except:
-            information.mentor = dic['mentor']
-        information.current_work_unit = dic['workplace']
-        information.address_work_unit = dic['address']
+            if information.mentor != dic['mentor']:
+                information.mentor = dic['mentor']
+                last_change_list.append(fields[12])
+        if information.current_work_unit != dic['workplace']:
+            information.current_work_unit = dic['workplace']
+            last_change_list.append(fields[13])
+        if information.address_work_unit != dic['address']:
+            information.address_work_unit = dic['address']
+            last_change_list.append(fields[14])
 
         switch2 = {
             "0": None,
@@ -178,15 +219,34 @@ def information_filling(request):
             "3": "企业",
             "4": "其他",
         }
-        information.industry_category = switch2[dic['category']]
+        if information.industry_category != switch2[dic['category']]:
+            information.industry_category = switch2[dic['category']]
+            last_change_list.append(fields[15])
+
         if dic['property'] != "0" and dic['property'] != '此处随行业类别变化而变化':
-            information.unit_property = dic['property']
+            if information.unit_property != dic['property']:
+                information.unit_property = dic['property']
+                last_change_list.append(fields[16])
         else:
             information.unit_property = None
             print("this user has not choose a correct unit_property")
-        information.current_job_title = dic['title']
-        information.honour = dic['honour']
-        information.remark = dic['comments']
+
+        if information.current_job_title != dic['title']:
+            information.current_job_title = dic['title']
+            last_change_list.append(fields[17])
+        if information.honour != dic['honour']:
+            information.honour = dic['honour']
+            last_change_list.append(fields[18])
+
+        if information.remark != dic['comments']:
+            information.remark = dic['comments']
+            last_change_list.append(fields[19])
+
+        string_changed_fields = ""
+        for i in last_change_list:
+            string_changed_fields += i + "/"
+        information.last_changed_fields = string_changed_fields[:-1]
+        print(information.last_changed_fields)
         information.save()
         request.user.information = information
         request.user.save()

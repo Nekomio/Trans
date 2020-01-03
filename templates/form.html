@@ -248,7 +248,7 @@
     <form action="/submit" autocomplete="on" class="byr-form" id="form_id" method="POST">
         {% csrf_token %}
         <blockquote class="byr-blockquote">
-            基本信息 {{user.last_login}}
+            基本信息 你最近登陆时间：{{user.information.last_submit}} 修改项：{{user.information.last_changed_fields}}
 
         </blockquote>
         <div class="byr-form-table">
