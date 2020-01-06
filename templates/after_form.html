@@ -1,16 +1,16 @@
 {% extends "form_base.html" %}
 {% block form_method %}
-method= "GET"
-{% endblock %}
-{% block name %}
-<label>{{user.information.name}}</label>
-{% endblock %}
-{% block sex %}
-<label>{{user.information.sex}}</label>
-{% endblock %}
-{% block phone %}
-<label>{{user.information.tell}}</label>
-{% endblock %}
+<form action="/submit" autocomplete="on" class="byr-form" id="form_id" method="GET">
+    {% endblock %}
+    {% block name %}
+    <label>{{user.information.name}}</label>
+    {% endblock %}
+    {% block sex %}
+    <label>{{user.information.sex}}</label>
+    {% endblock %}
+    {% block phone %}
+    <label>{{user.information.tell}}</label>
+    {% endblock %}
 {% block email %}
 <label>{{user.information.email}}</label>
 {% endblock %}

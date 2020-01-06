@@ -1,3 +1,4 @@
+VERSION = 1
 BACK_URL = 'back'
 BACK_LOGIN_URL = BACK_URL + "/"
 BACK_HOME_URL = BACK_URL + "/home"

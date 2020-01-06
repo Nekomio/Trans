@@ -1,6 +1,5 @@
 import os
 from io import BytesIO
-from time import time
 
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required, permission_required
@@ -11,7 +10,7 @@ from django.utils import timezone
 from xlwt import Workbook, XFStyle
 
 from AIR_System.settings import STATIC_ROOT
-from config import fields
+from config import fields, VERSION
 from home.models import Account, SchoolFellow
 from utils.ChekCode import CheckCode
 
@@ -28,7 +27,7 @@ def get_path(img_name):
 
 def register(request):
     print(request.POST)
-    resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': "", 'version': time()}
+    resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': "", 'version': VERSION}
     session_key = str(hash(request.META['REMOTE_ADDR']))
     if request.method == "POST":
         username = request.POST['username']
@@ -71,7 +70,7 @@ def register(request):
 
 
 def login(request):
-    resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': "", 'version': time()}
+    resp = {'error_msg': "", 'passcode_src': "", 'name': "", 'password': "", 'version': VERSION}
     session_key = str(hash(request.META['REMOTE_ADDR']))
     if request.method == "POST":
         print("has printed：post:", request.POST)
@@ -249,9 +248,9 @@ def information_filling(request):
         information.save()
         request.user.information = information
         request.user.save()
-        return render(request, 'after_form.html')
+        return render(request, 'after_form.html', {'version': VERSION})
     if request.method == "GET":
-        return render(request, 'form_base.html')
+        return render(request, 'form_base.html', {'version': VERSION})
 
 
 @permission_required(perm="home.view_schoolfellow", login_url="user.login", raise_exception=True)
