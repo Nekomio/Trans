@@ -151,21 +151,17 @@ def information_filling(request):
             information.tell = dic['tell']
             last_change_list.append(fields[2])
 
-        if information.fixed_tell != dic['fixed_tell']:
-            information.fixed_tell = dic['fixed_tell']
-            last_change_list.append(fields[3])
-
         if information.email != dic['email']:
             information.email = dic['email']
-            last_change_list.append(fields[4])
+            last_change_list.append(fields[3])
 
         if information.department != dic['department']:
             information.department = dic['department']
-            last_change_list.append(fields[5])
+            last_change_list.append(fields[4])
 
         if information.school_class != dic['class']:
             information.school_class = dic['class']
-            last_change_list.append(fields[6])
+            last_change_list.append(fields[5])
 
         switch1 = {
             "1": "本科生",
@@ -174,17 +170,17 @@ def information_filling(request):
         }
         if information.education != switch1[dic['education']]:
             information.education = switch1[dic['education']]
-            last_change_list.append(fields[7])
+            last_change_list.append(fields[6])
 
         if information.year_system != dic['year']:
             information.year_system = dic['year']
-            last_change_list.append(fields[8])
+            last_change_list.append(fields[7])
 
         year_enroll_choose_index = int(dic['startdate'])
         if year_enroll_choose_index != 0:
             if information.year_enroll != year_enroll_choose_index:
                 information.year_enroll = year_enroll_choose_index
-                last_change_list.append(fields[9])
+                last_change_list.append(fields[8])
         else:
             # information.year_enroll = None
             print(" has not choose the enroll year.")
@@ -193,7 +189,7 @@ def information_filling(request):
         if year_graduate_choose_index != 0:
             if information.year_graduate != year_graduate_choose_index:
                 information.year_graduate = year_graduate_choose_index
-                last_change_list.append(fields[10])
+                last_change_list.append(fields[9])
         else:
             # information.year_graduate = None
             print("has not choose the graduate year.")
@@ -201,17 +197,17 @@ def information_filling(request):
         try:
             if information.teacher != dic['teacher']:
                 information.teacher = dic['teacher']
-                last_change_list.append(fields[11])
+                last_change_list.append(fields[10])
         except:
             if information.mentor != dic['mentor']:
                 information.mentor = dic['mentor']
-                last_change_list.append(fields[12])
+                last_change_list.append(fields[11])
         if information.current_work_unit != dic['workplace']:
             information.current_work_unit = dic['workplace']
-            last_change_list.append(fields[13])
+            last_change_list.append(fields[12])
         if information.address_work_unit != dic['address']:
             information.address_work_unit = dic['address']
-            last_change_list.append(fields[14])
+            last_change_list.append(fields[13])
 
         switch2 = {
             "0": None,
@@ -222,26 +218,26 @@ def information_filling(request):
         }
         if information.industry_category != switch2[dic['category']]:
             information.industry_category = switch2[dic['category']]
-            last_change_list.append(fields[15])
+            last_change_list.append(fields[14])
 
         if dic['property'] != "0" and dic['property'] != '此处随行业类别变化而变化':
             if information.unit_property != dic['property']:
                 information.unit_property = dic['property']
-                last_change_list.append(fields[16])
+                last_change_list.append(fields[15])
         else:
             information.unit_property = None
             print("this user has not choose a correct unit_property")
 
         if information.current_job_title != dic['title']:
             information.current_job_title = dic['title']
-            last_change_list.append(fields[17])
+            last_change_list.append(fields[16])
         if information.honour != dic['honour']:
             information.honour = dic['honour']
-            last_change_list.append(fields[18])
+            last_change_list.append(fields[17])
 
         if information.remark != dic['comments']:
             information.remark = dic['comments']
-            last_change_list.append(fields[19])
+            last_change_list.append(fields[18])
 
         string_changed_fields = ""
         for i in last_change_list:
@@ -255,7 +251,7 @@ def information_filling(request):
         request.user.save()
         return render(request, 'after_form.html')
     if request.method == "GET":
-        return render(request, 'form.html')
+        return render(request, 'form_base.html')
 
 
 @permission_required(perm="home.view_schoolfellow", login_url="user.login", raise_exception=True)
@@ -272,24 +268,36 @@ def get_excel(request):
         w.write(i + 1, 0, fellows[i].name)
         w.write(i + 1, 1, fellows[i].sex)
         w.write(i + 1, 2, fellows[i].tell)
-        w.write(i + 1, 3, fellows[i].fixed_tell)
-        w.write(i + 1, 4, fellows[i].email)
-        w.write(i + 1, 5, fellows[i].department)
-        w.write(i + 1, 6, fellows[i].school_class)
-        w.write(i + 1, 7, fellows[i].education)
-        w.write(i + 1, 8, fellows[i].year_system)
-        # x = datetime.strftime(fellows[i].入学年份, '%Y-%m-%d')
-        w.write(i + 1, 9, fellows[i].year_enroll)
-        w.write(i + 1, 10, fellows[i].year_graduate)
-        w.write(i + 1, 11, fellows[i].teacher)
-        w.write(i + 1, 12, fellows[i].mentor)
-        w.write(i + 1, 13, fellows[i].current_work_unit)
-        w.write(i + 1, 14, fellows[i].address_work_unit)
-        w.write(i + 1, 15, fellows[i].industry_category)
-        w.write(i + 1, 16, fellows[i].unit_property)
-        w.write(i + 1, 17, fellows[i].current_job_title)
-        w.write(i + 1, 18, fellows[i].honour)
-        w.write(i + 1, 19, fellows[i].remark)
+        w.write(i + 1, 3, fellows[i].email)
+        w.write(i + 1, 4, fellows[i].department)
+        w.write(i + 1, 5, fellows[i].school_class)
+        w.write(i + 1, 6, fellows[i].education)
+        w.write(i + 1, 7, fellows[i].year_system)
+        w.write(i + 1, 8, fellows[i].year_enroll)
+        w.write(i + 1, 9, fellows[i].year_graduate)
+        w.write(i + 1, 10, fellows[i].teacher)
+        w.write(i + 1, 11, fellows[i].mentor)
+        w.write(i + 1, 12, fellows[i].current_work_unit)
+        w.write(i + 1, 13, fellows[i].address_work_unit)
+        w.write(i + 1, 14, fellows[i].industry_category)
+        w.write(i + 1, 15, fellows[i].unit_property)
+        w.write(i + 1, 16, fellows[i].current_job_title)
+        w.write(i + 1, 17, fellows[i].honour)
+        w.write(i + 1, 18, fellows[i].remark)
+    w.col(2).width = 5000
+    w.col(3).width = 6144
+    w.col(4).width = 4000
+    w.col(5).width = 3000
+    w.col(10).width = 4000
+    w.col(11).width = 4000
+    w.col(12).width = 4000
+    w.col(13).width = 4000
+    w.col(14).width = 4000
+    w.col(15).width = 4000
+    w.col(16).width = 4000
+    w.col(17).width = 4000
+    w.col(18).width = 40000
+
     sio = BytesIO()
     ws.save(sio)
     sio.seek(0)

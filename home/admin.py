@@ -28,9 +28,10 @@ class filterByGraduate(admin.SimpleListFilter):
 
 @admin.register(SchoolFellow)
 class SchoolFellowAdmin(admin.ModelAdmin):
-    list_display = ['name', 'sex', 'tell', 'fixed_tell', 'email', 'department', 'school_class', 'education',
+    list_display = ['name', 'sex', 'tell', 'email', 'department', 'school_class', 'education',
                     'year_system', 'year_enroll', 'year_graduate', 'teacher', 'mentor', 'current_work_unit',
-                    'address_work_unit', 'industry_category', 'unit_property', 'current_job_title', 'honour', 'remark']
+                    'address_work_unit', 'industry_category', 'unit_property', 'current_job_title', 'honour', 'remark',
+                    'last_submit', 'last_changed_fields']
     list_filter = ['sex', 'department', 'education', 'year_system', 'year_enroll', 'year_graduate', 'industry_category',
                    'unit_property', ]
     search_fields = list_display

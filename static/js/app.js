@@ -1,14 +1,17 @@
 collectForm = () => {
-    fields = ['name', 'sex', 'phone', 'cellPhone',
-        'email', 'department', 'class', 'education',
-        'year', 'startdate', 'enddate', 'teacher',
-        'workplace', 'address', 'category',
-        'property', 'title', 'honour', 'comments'
+    fields = ['name', 'sex', 'phone',
+        'email', 'yuanxi', 'banji', 'xueli',
+        'xuezhi', 'startdate', 'enddate', 'teacher','professor',
+        'workplace', 'now-work', 'industry-selector',
+        'workprop', 'status', 'prize', 'byt'
     ]
-    var getVal = field => document.getElementById(field).value
     return Object.assign(...fields.map(k => ({
         [k]: getVal(k)
     })))
+}
+function getVal(id){
+    console.log(id)
+    return document.getElementById(id).value;
 }
 
 function Either(isOk, val) {

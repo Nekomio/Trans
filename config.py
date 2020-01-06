@@ -8,8 +8,7 @@ MAIN_LOGIN_URL = MAIN_URL + '/login'
 MAIN_LOGOUT_URL = MAIN_URL + 'lo'
 fields = [u'姓名',
           '性别',
-          '移动电话',
-          '固定电话',
+          '移动电话/固定电话',
           '电子邮箱',
           '院系',
           '班级',
