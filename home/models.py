@@ -8,7 +8,7 @@ from config import fields
 class SchoolFellow(models.Model):
     i = 0
     name = models.CharField(max_length=30, null=False, verbose_name=fields[i + 0])
-    sex = models.CharField(max_length=1, null=False, verbose_name=fields[i + 1])
+    sex_id = models.CharField(max_length=1, null=False, verbose_name=fields[i + 1])
     tell = models.CharField(blank=True, max_length=12, null=True, verbose_name=fields[i + 2])
     i = 0
     email = models.EmailField(null=False, verbose_name=fields[i + 3])

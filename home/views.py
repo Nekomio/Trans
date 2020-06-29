@@ -142,8 +142,8 @@ def information_filling(request):
             '1': "男",
             "2": "女",
         }
-        if information.sex != switch[dic['sex']]:
-            information.sex = switch[dic['sex']]
+        if information.sex != switch[dic['sex_id']]:
+            information.sex = switch[dic['sex_id']]
             last_change_list.append(fields[1])
 
         if information.tell != dic['tell']:
