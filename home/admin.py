@@ -38,7 +38,7 @@ class SchoolFellowAdmin(admin.ModelAdmin):
     #                 'year_system', 'year_enroll', 'year_graduate', 'teacher', 'mentor', 'current_work_unit',
     #                 'address_work_unit', 'industry_category', 'unit_property', 'current_job_title', 'honour', 'remark',
     #                 'last_submit', 'last_changed_fields']
-    list_filter = ['sex', 'department', 'education', 'year_system', 'year_enroll', 'year_graduate', 'industry_category',
+    list_filter = ['sex', 'department1', 'education1', 'year_system1', 'year_enroll1', 'year_graduate1', 'industry_category',
                    'unit_property', ]
     search_fields = list_display
 
