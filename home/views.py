@@ -365,7 +365,10 @@ def get_excel(request):
     date_format.num_format_str = 'yyyy-mm-dd'
     for i in range(len(fellows)):
         w.write(i + 1, 0, fellows[i].name)
-        w.write(i + 1, 1, fellows[i].sex)
+        if fellows[i].sex_id == 1:
+            w.write(i + 1, 1, "男")
+        else:
+            w.write(i + 1, 1, "女")
         w.write(i + 1, 2, fellows[i].tell)
         w.write(i + 1, 3, fellows[i].email)
         w.write(i + 1, 4, fellows[i].department1)
@@ -377,23 +380,39 @@ def get_excel(request):
         w.write(i + 1, 10, fellows[i].teacher1)
         w.write(i + 1, 11, fellows[i].mentor1)
         
-        w.write(i + 1, 12, fellows[i].department2)
-        w.write(i + 1, 13, fellows[i].school_class2)
-        w.write(i + 1, 14, fellows[i].education2)
-        w.write(i + 1, 15, fellows[i].year_system2)
-        w.write(i + 1, 16, fellows[i].year_enroll2)
-        w.write(i + 1, 17, fellows[i].year_graduate2)
-        w.write(i + 1, 18, fellows[i].teacher2)
-        w.write(i + 1, 19, fellows[i].mentor2)
+        if fellows[i].department2:
+            w.write(i + 1, 12, fellows[i].department2)
+        if fellows[i].school_class2:
+            w.write(i + 1, 13, fellows[i].school_class2)
+        if fellows[i].education2:
+            w.write(i + 1, 14, fellows[i].education2)
+        if fellows[i].year_system2:
+            w.write(i + 1, 15, fellows[i].year_system2)
+        if fellows[i].year_enroll2:
+            w.write(i + 1, 16, fellows[i].year_enroll2)
+        if fellows[i].year_graduate2:
+            w.write(i + 1, 17, fellows[i].year_graduate2)
+        if fellows[i].teacher2:
+            w.write(i + 1, 18, fellows[i].teacher2)
+        if fellows[i].mentor2:
+            w.write(i + 1, 19, fellows[i].mentor2)
 
-        w.write(i + 1, 20, fellows[i].department3)
-        w.write(i + 1, 21, fellows[i].school_class3)
-        w.write(i + 1, 22, fellows[i].education3)
-        w.write(i + 1, 23, fellows[i].year_system3)
-        w.write(i + 1, 24, fellows[i].year_enroll3)
-        w.write(i + 1, 25, fellows[i].year_graduate3)
-        w.write(i + 1, 26, fellows[i].teacher3)
-        w.write(i + 1, 27, fellows[i].mentor3)
+        if fellows[i].department3: 
+            w.write(i + 1, 20, fellows[i].department3)
+        if fellows[i].school_class3: 
+            w.write(i + 1, 21, fellows[i].school_class3)
+        if fellows[i].education3: 
+            w.write(i + 1, 22, fellows[i].education3)
+        if fellows[i].year_system3: 
+            w.write(i + 1, 23, fellows[i].year_system3)
+        if fellows[i].year_enroll3: 
+            w.write(i + 1, 24, fellows[i].year_enroll3)
+        if fellows[i].year_graduate3: 
+            w.write(i + 1, 25, fellows[i].year_graduate3)
+        if fellows[i].teacher3: 
+            w.write(i + 1, 26, fellows[i].teacher3)
+        if fellows[i].mentor3: 
+            w.write(i + 1, 27, fellows[i].mentor3)
 
         w.write(i + 1, 28, fellows[i].current_work_unit)
         w.write(i + 1, 29, fellows[i].address_work_unit)
