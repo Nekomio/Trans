@@ -408,7 +408,7 @@
                 </div>
                 <div class="col-md-4">
                     {% block education1 %}
-                    <select id="xueli1" name="education1" onchange="show(this.options)">
+                    <select id="xueli1" name="education1" onchange="show1(this.options)">
                         <option value="0">北邮给您的第一个学位证上的学历</option>
                         <option value="1">本科生</option>
                         <option value="2">硕士研究生</option>
@@ -501,7 +501,7 @@
                 </div>
             </div>
             <script>
-            function show(e) {
+            function show1(e) {
                 // console.log(e);
                 //这里的value不是中文,而是键值对的value
                 const teacher = document.querySelector("#teacher1");
@@ -555,7 +555,7 @@
                 </div>
                 <div class="col-md-4">
                     {% block education2 %}
-                    <select id="xueli2" name="education2" onchange="show(this.options)">
+                    <select id="xueli2" name="education2" onchange="show2(this.options)">
                         <option value="0">北邮给您的第二个学位证上的学历(没有则不填)</option>
                         <option value="1">本科生</option>
                         <option value="2">硕士研究生</option>
@@ -648,7 +648,7 @@
                 </div>
             </div>
             <script>
-            function show(e) {
+            function show2(e) {
                 // console.log(e);
                 //这里的value不是中文,而是键值对的value
                 const teacher = document.querySelector("#teacher2");
@@ -702,7 +702,7 @@
                 </div>
                 <div class="col-md-4">
                     {% block education3 %}
-                    <select id="xueli3" name="education3" onchange="show(this.options)">
+                    <select id="xueli3" name="education3" onchange="show3(this.options)">
                         <option value="0">北邮给您的第三个学位证上的学历(没有则不填)</option>
                         <option value="1">本科生</option>
                         <option value="2">硕士研究生</option>
@@ -795,7 +795,7 @@
                 </div>
             </div>
             <script>
-            function show(e) {
+            function show3(e) {
                 // console.log(e);
                 //这里的value不是中文,而是键值对的value
                 const teacher = document.querySelector("#teacher3");
@@ -935,7 +935,9 @@
                                     break;
                                 }
                             }
-                            show("auto")
+                            show1("auto");
+                            show2("auto");
+                            show3("auto");
 
                             let startdate1 = document.getElementById("startdate1");
                             let enddate1 = document.getElementById("enddate1");
