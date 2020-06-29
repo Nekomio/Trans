@@ -263,7 +263,10 @@
             }
         }
 
-
+        .red {
+            color:red;
+            font-family:"Microsoft YaHei";
+        }
 
 
     </style>
@@ -375,7 +378,7 @@
             </div>
         </div>
         <blockquote class="byr-blockquote">
-            在校信息
+            在校学习经历1
         </blockquote>
         <div class="byr-form-table">
             <!--            以下存疑-->
@@ -385,8 +388,8 @@
                 </div>
                 <div class="col-md-4">
                     {% block department %}
-                    <input id="yuanxi" name="department" placeholder="例:计算机学院" type="text"
-                           value="{{user.information.department}}">
+                    <input id="yuanxi" name="department1" placeholder="例:计算机学院" type="text"
+                           value="{{user.information.department1}}">
                     {% endblock %}
                 </div>
                 <div class="col-md-2">
@@ -394,8 +397,8 @@
                 </div>
                 <div class="col-md-4">
                     {% block class %}
-                    <input id="banji" name="class" placeholder="例:10班" type="text"
-                           value="{{user.information.school_class}}">
+                    <input id="banji" name="class1" placeholder="例:10班" type="text"
+                           value="{{user.information.school_class1}}">
                     {% endblock %}
                 </div>
             </div>
@@ -405,7 +408,8 @@
                 </div>
                 <div class="col-md-4">
                     {% block education %}
-                    <select id="xueli" name="education" onchange="show(this.options)">
+                    <select id="xueli" name="education1" onchange="show(this.options)">
+                        <option value="0">北邮给您的第一个学位证上的学历</option>
                         <option value="1">本科生</option>
                         <option value="2">硕士研究生</option>
                         <option value="3">博士生</option>
@@ -417,8 +421,8 @@
                 </div>
                 <div class="col-md-4">
                     {% block year %}
-                    <input id="xuezhi" name="year" placeholder="例:四年" type="text"
-                           value="{{user.information.year_system}}">
+                    <input id="xuezhi" name="year1" placeholder="例:四年" type="text"
+                           value="{{user.information.year_system1}}">
                     {% endblock %}
                 </div>
             </div>
@@ -428,7 +432,7 @@
                 </div>
                 <div class="col-md-4">
                     {% block year_enroll %}
-                    <select id="startdate" name="startdate">
+                    <select id="startdate" name="startdate1">
                         <option value="0">请选择入学年份</option>
                     </select>
                     {% endblock %}
@@ -439,7 +443,7 @@
                 </div>
                 <div class="col-md-4">
                     {% block year_graduate %}
-                    <select id="enddate" name="date2">
+                    <select id="enddate" name="date21">
                         <option value="0">请选择毕业年份</option>
                     </select>
                     {% endblock %}
@@ -475,10 +479,10 @@
                 <div class="col-md-4">
                     {% block teacher %}
                     {% if user.information.teacher %}
-                    <input class="teacher" id="teacher" name="teacher" placeholder="例:徐萨" type="text"
-                           value="{{user.information.teacher}}">
+                    <input class="teacher" id="teacher" name="teacher1" placeholder="例:徐萨" type="text"
+                           value="{{user.information.teacher1}}">
                     {% else %}
-                    <input class="teacher" id="teacher" name="teacher" placeholder="例:徐萨" type="text">
+                    <input class="teacher" id="teacher" name="teacher1" placeholder="例:徐萨" type="text">
                     {% endif %}
                     {% endblock %}
                 </div>
@@ -488,10 +492,304 @@
                 <div class="col-md-4">
                     {% block mentor %}
                     {% if user.information.mentor %}
-                    <input class="professor" disabled="disabled" id="professor" name="mentor" type="text"
-                           value="{{user.information.mentor}}">
+                    <input class="professor" disabled="disabled" id="professor" name="mentor1" type="text"
+                           value="{{user.information.mentor1}}">
                     {% else %}
-                    <input class="professor" disabled="disabled" id="professor" name="mentor" type="text">
+                    <input class="professor" disabled="disabled" id="professor" name="mentor1" type="text">
+                    {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+            <script>
+            function show(e) {
+                // console.log(e);
+                //这里的value不是中文,而是键值对的value
+                const teacher = document.querySelector(".teacher");
+                const professor = document.querySelector(".professor");
+                for (let i = 0; i < xueli.length; i++) {
+                    let element = xueli.children.item(i);
+                    if (element.selected && i === 0) {
+                        teacher.removeAttribute("disabled");
+                        professor.setAttribute("disabled", "true");
+                        if(e=="auto"){
+                        }else{alert("学历为本科生时,不用填写导师姓名");}
+
+                    } else if (element.selected && i !== 0) {
+                        professor.removeAttribute("disabled");
+                        teacher.setAttribute("disabled", "disabled");
+                        if(e=="auto"){}else{alert("学历为研究生时,不用填写辅导员或印象最深的导师!");}
+                    }
+                }
+            }
+
+            </script>
+        </div>
+        <blockquote class="byr-blockquote">
+            在校学习经历2(非北邮本硕或非北邮硕博不填)
+        </blockquote>
+        <div class="byr-form-table">
+            <!--            以下存疑-->
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="yuanxi">院系</label>
+                </div>
+                <div class="col-md-4">
+                    {% block department %}
+                    <input id="yuanxi" name="department2" placeholder="例:计算机学院" type="text"
+                           value="{{user.information.department2}}">
+                    {% endblock %}
+                </div>
+                <div class="col-md-2">
+                    <label for="banji">班级</label>
+                </div>
+                <div class="col-md-4">
+                    {% block class %}
+                    <input id="banji" name="class2" placeholder="例:10班" type="text"
+                           value="{{user.information.school_class2}}">
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="xueli">北邮学历</label>
+                </div>
+                <div class="col-md-4">
+                    {% block education %}
+                    <select id="xueli" name="education2" onchange="show(this.options)">
+                        <option value="0">北邮给您的第二个学位证上的学历(没有则不填)</option>
+                        <option value="1">本科生</option>
+                        <option value="2">硕士研究生</option>
+                        <option value="3">博士生</option>
+                    </select>
+                    {% endblock %}
+                </div>
+                <div class="col-md-2">
+                    <label for="xuezhi">学制</label>
+                </div>
+                <div class="col-md-4">
+                    {% block year %}
+                    <input id="xuezhi" name="year2" placeholder="例:四年" type="text"
+                           value="{{user.information.year_system2}}">
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="startdate">入学年份</label>
+                </div>
+                <div class="col-md-4">
+                    {% block year_enroll %}
+                    <select id="startdate" name="startdate2">
+                        <option value="0">请选择入学年份</option>
+                    </select>
+                    {% endblock %}
+                </div>
+
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="enddate">毕业年份</label>
+                </div>
+                <div class="col-md-4">
+                    {% block year_graduate %}
+                    <select id="enddate" name="date22">
+                        <option value="0">请选择毕业年份</option>
+                    </select>
+                    {% endblock %}
+                    <!--                认怂,这里不再追求本科生的地方也触发onchange,而是把hidden去掉-->
+                </div>
+            </div>
+            <script>
+                window.onload = function () {
+                    let startdate = document.getElementById("startdate");
+                    let enddate = document.getElementById("enddate");
+                    let date = new Date().getFullYear();
+
+                    for (let i = 1955; i < date - 4; i++) {
+                        let option = document.createElement("option");
+                        let end = document.createElement("option");
+
+                        option.innerHTML = `<option value="${i - 1992}">${i}</option>`;
+                        end.innerHTML = `<option value="${i - 1992}">${i + 4}</option>`;
+
+                        enddate.add(end, null);
+                        startdate.add(option, null);
+
+                    }
+                }
+
+
+
+            </script>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="teacher">印象最深的教授或导员</label>
+                </div>
+                <div class="col-md-4">
+                    {% block teacher %}
+                    {% if user.information.teacher %}
+                    <input class="teacher" id="teacher" name="teacher2" placeholder="例:徐萨" type="text"
+                           value="{{user.information.teacher2}}">
+                    {% else %}
+                    <input class="teacher" id="teacher" name="teacher2" placeholder="例:徐萨" type="text">
+                    {% endif %}
+                    {% endblock %}
+                </div>
+                <div class="col-md-2">
+                    <label for="professor">导师姓名</label>
+                </div>
+                <div class="col-md-4">
+                    {% block mentor %}
+                    {% if user.information.mentor %}
+                    <input class="professor" disabled="disabled" id="professor" name="mentor2" type="text"
+                           value="{{user.information.mentor2}}">
+                    {% else %}
+                    <input class="professor" disabled="disabled" id="professor" name="mentor2" type="text">
+                    {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+            <script>
+            function show(e) {
+                // console.log(e);
+                //这里的value不是中文,而是键值对的value
+                const teacher = document.querySelector(".teacher");
+                const professor = document.querySelector(".professor");
+                for (let i = 0; i < xueli.length; i++) {
+                    let element = xueli.children.item(i);
+                    if (element.selected && i === 0) {
+                        teacher.removeAttribute("disabled");
+                        professor.setAttribute("disabled", "true");
+                        if(e=="auto"){
+                        }else{alert("学历为本科生时,不用填写导师姓名");}
+
+                    } else if (element.selected && i !== 0) {
+                        professor.removeAttribute("disabled");
+                        teacher.setAttribute("disabled", "disabled");
+                        if(e=="auto"){}else{alert("学历为研究生时,不用填写辅导员或印象最深的导师!");}
+                    }
+                }
+            }
+
+            </script>
+        </div>
+        <blockquote class="byr-blockquote">
+            在校学习经历3(非北邮本硕博不填)
+        </blockquote>
+        <div class="byr-form-table">
+            <!--            以下存疑-->
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="yuanxi">院系</label>
+                </div>
+                <div class="col-md-4">
+                    {% block department %}
+                    <input id="yuanxi" name="department3" placeholder="例:计算机学院" type="text"
+                           value="{{user.information.department3}}">
+                    {% endblock %}
+                </div>
+                <div class="col-md-2">
+                    <label for="banji">班级</label>
+                </div>
+                <div class="col-md-4">
+                    {% block class %}
+                    <input id="banji" name="class3" placeholder="例:10班" type="text"
+                           value="{{user.information.school_class3}}">
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="xueli">北邮学历</label>
+                </div>
+                <div class="col-md-4">
+                    {% block education %}
+                    <select id="xueli" name="education3" onchange="show(this.options)">
+                        <option value="0">北邮给您的第三个学位证上的学历(没有则不填)</option>
+                        <option value="1">本科生</option>
+                        <option value="2">硕士研究生</option>
+                        <option value="3">博士生</option>
+                    </select>
+                    {% endblock %}
+                </div>
+                <div class="col-md-2">
+                    <label for="xuezhi">学制</label>
+                </div>
+                <div class="col-md-4">
+                    {% block year %}
+                    <input id="xuezhi" name="year3" placeholder="例:四年" type="text"
+                           value="{{user.information.year_system3}}">
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="startdate">入学年份</label>
+                </div>
+                <div class="col-md-4">
+                    {% block year_enroll %}
+                    <select id="startdate" name="startdate3">
+                        <option value="0">请选择入学年份</option>
+                    </select>
+                    {% endblock %}
+                </div>
+
+                <div class="col-md-2">
+                    <label class="byr-form-required" for="enddate">毕业年份</label>
+                </div>
+                <div class="col-md-4">
+                    {% block year_graduate %}
+                    <select id="enddate" name="date23">
+                        <option value="0">请选择毕业年份</option>
+                    </select>
+                    {% endblock %}
+                    <!--                认怂,这里不再追求本科生的地方也触发onchange,而是把hidden去掉-->
+                </div>
+            </div>
+            <script>
+                window.onload = function () {
+                    let startdate = document.getElementById("startdate");
+                    let enddate = document.getElementById("enddate");
+                    let date = new Date().getFullYear();
+
+                    for (let i = 1955; i < date - 4; i++) {
+                        let option = document.createElement("option");
+                        let end = document.createElement("option");
+
+                        option.innerHTML = `<option value="${i - 1992}">${i}</option>`;
+                        end.innerHTML = `<option value="${i - 1992}">${i + 4}</option>`;
+
+                        enddate.add(end, null);
+                        startdate.add(option, null);
+
+                    }
+                }
+
+
+
+            </script>
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="teacher">印象最深的教授或导员</label>
+                </div>
+                <div class="col-md-4">
+                    {% block teacher %}
+                    {% if user.information.teacher %}
+                    <input class="teacher" id="teacher" name="teacher3" placeholder="例:徐萨" type="text"
+                           value="{{user.information.teacher3}}">
+                    {% else %}
+                    <input class="teacher" id="teacher" name="teacher3" placeholder="例:徐萨" type="text">
+                    {% endif %}
+                    {% endblock %}
+                </div>
+                <div class="col-md-2">
+                    <label for="professor">导师姓名</label>
+                </div>
+                <div class="col-md-4">
+                    {% block mentor %}
+                    {% if user.information.mentor %}
+                    <input class="professor" disabled="disabled" id="professor" name="mentor3" type="text"
+                           value="{{user.information.mentor3}}">
+                    {% else %}
+                    <input class="professor" disabled="disabled" id="professor" name="mentor3" type="text">
                     {% endif %}
                     {% endblock %}
                 </div>
@@ -686,11 +984,11 @@
                 </div>
             </div>
         </div>
-        <blockquote class="byr-blockquote">备注</blockquote>
+        <blockquote class="byr-blockquote">寄语母校</blockquote>
         <div class="byr-form-table">
             <div class="row">
                 <div class="col-md-2">
-                    <label for="byt">备注</label>
+                    <label for="byt">寄语母校</label>
                 </div>
                 <div class="col-md-10" id="form-textarea">
                     <div class="byr-form-textarea">
