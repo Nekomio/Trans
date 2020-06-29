@@ -163,6 +163,7 @@ def information_filling(request):
             last_change_list.append(fields[5])
 
         switch1 = {
+            "0": None,
             "1": "本科生",
             "2": "硕士研究生",
             "3": "博士生",
@@ -211,6 +212,7 @@ def information_filling(request):
             last_change_list.append(fields[13])
 
         switch1 = {
+            "0": None,
             "1": "本科生",
             "2": "硕士研究生",
             "3": "博士生",
@@ -259,6 +261,7 @@ def information_filling(request):
             last_change_list.append(fields[21])
 
         switch1 = {
+            "0": None,
             "1": "本科生",
             "2": "硕士研究生",
             "3": "博士生",
