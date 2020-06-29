@@ -1,7 +1,7 @@
 collectForm = () => {
     fields = ['name', 'sex', 'phone',
-        'email', 'yuanxi', 'banji', 'xueli',
-        'xuezhi', 'startdate', 'enddate', 'teacher','professor',
+        'email', 'yuanxi', 'banji', 'xueli1',
+        'xuezhi1', 'startdate1', 'enddate1', 'teacher1','professor1',
         'workplace', 'now-work', 'industry-selector',
         'workprop', 'status', 'prize', 'byt'
     ]
@@ -34,10 +34,10 @@ mkRequiredValidator = (field, alias, pred) =>
 sexVal = mkRequiredValidator('sex', '性别', x => x != "0")
 nameVal = mkRequiredValidator('name', '姓名', x => x != "")
 emailRVal = mkRequiredValidator('email', '电子邮箱', x => x != "")
-departmentVal = mkRequiredValidator('department', '院系', x => x != "")
-startVal = mkRequiredValidator('start', '入学年份', x => x != "")
-graduateVal = mkRequiredValidator('graduate', '毕业年份', x => x != "")
-workplaceVal = mkRequiredValidator('workplace', '现工作单位', x => x != "")
+departmentVal = mkRequiredValidator('department1', '院系', x => x != "")
+startVal = mkRequiredValidator('start1', '入学年份', x => x != "")
+graduateVal = mkRequiredValidator('graduate1', '毕业年份', x => x != "")
+workplaceVal = mkRequiredValidator('workplace1', '现工作单位', x => x != "")
 
 emailVal = form => (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form['email'])) ? Right(form) : Left("电子邮箱无效！")
 phoneOrCellPhoneVal = form => (form['phone'] == "" && form['cellPhone'] == "") ? Left("手机号码与固定电话至少填写一个！") : Right(form)
