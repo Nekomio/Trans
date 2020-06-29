@@ -408,7 +408,7 @@
                 </div>
                 <div class="col-md-4">
                     {% block education1 %}
-                    <select id="xueli" name="education1" onchange="show(this.options)">
+                    <select id="xueli1" name="education1" onchange="show(this.options)">
                         <option value="0">北邮给您的第一个学位证上的学历</option>
                         <option value="1">本科生</option>
                         <option value="2">硕士研究生</option>
@@ -506,8 +506,8 @@
                 //这里的value不是中文,而是键值对的value
                 const teacher = document.querySelector(".teacher1");
                 const professor = document.querySelector(".professor1");
-                for (let i = 0; i < xueli.length; i++) {
-                    let element = xueli.children.item(i);
+                for (let i = 0; i < xueli1.length; i++) {
+                    let element = xueli1.children.item(i);
                     if (element.selected && i === 0) {
                         teacher.removeAttribute("disabled");
                         professor.setAttribute("disabled", "true");
@@ -555,7 +555,7 @@
                 </div>
                 <div class="col-md-4">
                     {% block education2 %}
-                    <select id="xueli" name="education2" onchange="show(this.options)">
+                    <select id="xueli2" name="education2" onchange="show(this.options)">
                         <option value="0">北邮给您的第二个学位证上的学历(没有则不填)</option>
                         <option value="1">本科生</option>
                         <option value="2">硕士研究生</option>
@@ -653,8 +653,8 @@
                 //这里的value不是中文,而是键值对的value
                 const teacher = document.querySelector(".teacher2");
                 const professor = document.querySelector(".professor2");
-                for (let i = 0; i < xueli.length; i++) {
-                    let element = xueli.children.item(i);
+                for (let i = 0; i < xueli2.length; i++) {
+                    let element = xueli2.children.item(i);
                     if (element.selected && i === 0) {
                         teacher.removeAttribute("disabled");
                         professor.setAttribute("disabled", "true");
@@ -702,7 +702,7 @@
                 </div>
                 <div class="col-md-4">
                     {% block education3 %}
-                    <select id="xueli" name="education3" onchange="show(this.options)">
+                    <select id="xueli3" name="education3" onchange="show(this.options)">
                         <option value="0">北邮给您的第三个学位证上的学历(没有则不填)</option>
                         <option value="1">本科生</option>
                         <option value="2">硕士研究生</option>
@@ -800,8 +800,8 @@
                 //这里的value不是中文,而是键值对的value
                 const teacher = document.querySelector(".teacher3");
                 const professor = document.querySelector(".professor3");
-                for (let i = 0; i < xueli.length; i++) {
-                    let element = xueli.children.item(i);
+                for (let i = 0; i < xueli3.length; i++) {
+                    let element = xueli3.children.item(i);
                     if (element.selected && i === 0) {
                         teacher.removeAttribute("disabled");
                         professor.setAttribute("disabled", "true");
@@ -921,8 +921,12 @@
                             }
                             show("auto")
 
-                            let startdate = document.getElementById("startdate");
-                            let enddate = document.getElementById("enddate");
+                            let startdate1 = document.getElementById("startdate1");
+                            let enddate1 = document.getElementById("enddate1");
+                            let startdate2 = document.getElementById("startdate2");
+                            let enddate2 = document.getElementById("enddate2");
+                            let startdate3 = document.getElementById("startdate3");
+                            let enddate3 = document.getElementById("enddate3");
                             let date = new Date().getFullYear();
                             console.log("success.");
                             for (let i = 1955; i < date-4; i++) {
@@ -933,26 +937,70 @@
                                 option.innerHTML = `<option value="${i - 1992}">${i}</option>`;
                                 end.innerHTML = `<option value="${i - 1992}">${i + 4}</option>`;
 
-                                enddate.add(end, null);
-                                startdate.add(option, null);
+                                enddate1.add(end, null);
+                                startdate1.add(option, null);
+                                enddate2.add(end, null);
+                                startdate2.add(option, null);
+                                enddate3.add(end, null);
+                                startdate3.add(option, null);
                             }
 
-                            if("{{user.information.year_enroll}}"!=""){
-                                for(i =0;i<startdate.options.length;i++){
-                                    console.log((1954+i).toString()+"=={{user.information.year_enroll}}");
-                                    if((1954+i).toString()=="{{user.information.year_enroll}}"){
-                                        console.log((1954+i).toString()=="{{user.information.year_enroll}}");
-                                        startdate.options[i].selected = true;
+                            if("{{user.information.year_enroll1}}"!=""){
+                                for(i =0;i<startdate1.options.length;i++){
+                                    console.log((1954+i).toString()+"=={{user.information.year_enroll1}}");
+                                    if((1954+i).toString()=="{{user.information.year_enroll1}}"){
+                                        console.log((1954+i).toString()=="{{user.information.year_enroll1}}");
+                                        startdate1.options[i].selected = true;
                                         break;
                                     }
                                 }
                             }
-                            if("{{user.information.year_graduate}}"!=""){
-                                for(i =0;i<enddate.options.length;i++){
-                                    console.log((1958+i).toString()+"=={{user.information.year_graduate}}");
-                                    if((1958+i).toString()=="{{user.information.year_graduate}}"){
-                                        console.log((1958+i).toString()=="{{user.information.year_graduate}}");
-                                        enddate.options[i].selected = true;
+                            if("{{user.information.year_enroll2}}"!=""){
+                                for(i =0;i<startdate2.options.length;i++){
+                                    console.log((1954+i).toString()+"=={{user.information.year_enroll2}}");
+                                    if((1954+i).toString()=="{{user.information.year_enroll2}}"){
+                                        console.log((1954+i).toString()=="{{user.information.year_enroll2}}");
+                                        startdate2.options[i].selected = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if("{{user.information.year_enroll3}}"!=""){
+                                for(i =0;i<startdate3.options.length;i++){
+                                    console.log((1954+i).toString()+"=={{user.information.year_enroll3}}");
+                                    if((1954+i).toString()=="{{user.information.year_enroll3}}"){
+                                        console.log((1954+i).toString()=="{{user.information.year_enroll3}}");
+                                        startdate3.options[i].selected = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if("{{user.information.year_graduate1}}"!=""){
+                                for(i =0;i<enddate1.options.length;i++){
+                                    console.log((1958+i).toString()+"=={{user.information.year_graduate1}}");
+                                    if((1958+i).toString()=="{{user.information.year_graduate1}}"){
+                                        console.log((1958+i).toString()=="{{user.information.year_graduate1}}");
+                                        enddate1.options[i].selected = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if("{{user.information.year_graduate2}}"!=""){
+                                for(i =0;i<enddate2.options.length;i++){
+                                    console.log((1958+i).toString()+"=={{user.information.year_graduate2}}");
+                                    if((1958+i).toString()=="{{user.information.year_graduate2}}"){
+                                        console.log((1958+i).toString()=="{{user.information.year_graduate2}}");
+                                        enddate2.options[i].selected = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if("{{user.information.year_graduate3}}"!=""){
+                                for(i =0;i<enddate3.options.length;i++){
+                                    console.log((1958+i).toString()+"=={{user.information.year_graduate3}}");
+                                    if((1958+i).toString()=="{{user.information.year_graduate3}}"){
+                                        console.log((1958+i).toString()=="{{user.information.year_graduate3}}");
+                                        enddate3.options[i].selected = true;
                                         break;
                                     }
                                 }
