@@ -1,5 +1,5 @@
 collectForm = () => {
-    fields = ['name', 'sex', 'phone',
+    fields = ['name', 'sex_id', 'phone',
         'email', 'yuanxi', 'banji', 'xueli1',
         'xuezhi1', 'startdate1', 'enddate1', 'teacher1','professor1',
         'workplace', 'now-work', 'industry-selector',
