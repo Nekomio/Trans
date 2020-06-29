@@ -182,7 +182,7 @@ def information_filling(request):
                 information.year_enroll1 = year_enroll_choose_index1
                 last_change_list.append(fields[8])
         else:
-            # information.year_enroll = None
+            information.year_enroll1 = None
             print(" has not choose the enroll year.")
 
         year_graduate_choose_index1 = int(dic['date21'])
@@ -191,7 +191,7 @@ def information_filling(request):
                 information.year_graduate1 = year_graduate_choose_index1
                 last_change_list.append(fields[9])
         else:
-            # information.year_graduate = None
+            information.year_graduate1 = None
             print("has not choose the graduate year.")
 
         try:
@@ -231,7 +231,7 @@ def information_filling(request):
                 information.year_enroll2 = year_enroll_choose_index2
                 last_change_list.append(fields[16])
         else:
-            # information.year_enroll = None
+            information.year_enroll2 = None
             print(" has not choose the enroll year.")
 
         year_graduate_choose_index2 = int(dic['date22'])
@@ -240,7 +240,7 @@ def information_filling(request):
                 information.year_graduate2 = year_graduate_choose_index2
                 last_change_list.append(fields[17])
         else:
-            # information.year_graduate = None
+            information.year_graduate2 = None
             print("has not choose the graduate year.")
 
         try:
@@ -280,7 +280,7 @@ def information_filling(request):
                 information.year_enroll3 = year_enroll_choose_index3
                 last_change_list.append(fields[24])
         else:
-            # information.year_enroll = None
+            information.year_enroll3 = None
             print(" has not choose the enroll year.")
 
         year_graduate_choose_index3 = int(dic['date23'])
@@ -289,7 +289,7 @@ def information_filling(request):
                 information.year_graduate3 = year_graduate_choose_index3
                 last_change_list.append(fields[25])
         else:
-            # information.year_graduate = None
+            information.year_graduate2 = None
             print("has not choose the graduate year.")
 
         try:
