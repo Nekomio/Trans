@@ -955,14 +955,20 @@
 
                                 enddate1.add(end, null);
                                 startdate1.add(option, null);
-
+                            }
+                            for (let i = 1955; i < date-4; i++) {
+                                let option = document.createElement("option");
+                                let end = document.createElement("option");
+                                console.log("innerdate");
                                 option.innerHTML = `<option value="${i - 1992}">${i}</option>`;
                                 end.innerHTML = `<option value="${i - 1992}">${i + 4}</option>`;
-                                // console.log("date1");
                                 enddate2.add(end, null);
                                 startdate2.add(option, null);
-                                // console.log("date2");
-
+                            }
+                            for (let i = 1955; i < date-4; i++) {
+                                let option = document.createElement("option");
+                                let end = document.createElement("option");
+                                console.log("innerdate");
                                 option.innerHTML = `<option value="${i - 1992}">${i}</option>`;
                                 end.innerHTML = `<option value="${i - 1992}">${i + 4}</option>`;
                                 enddate3.add(end, null);
