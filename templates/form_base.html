@@ -911,11 +911,27 @@
                                     break;
                                 }
                             }
-                            education = document.getElementById("xueli");
-                            for(i=0;i<education.options.length;i++){
-                                console.log(""+i+":"+(education_list[i] == "{{user.information.education}}"))
-                                if(education_list[i] == "{{user.information.education}}"){
-                                    education.options[i].selected = true
+                            education1 = document.getElementById("xueli1");
+                            for(i=0;i<education1.options.length;i++){
+                                console.log(""+i+":"+(education_list[i] == "{{user.information.education1}}"))
+                                if(education_list[i] == "{{user.information.education1}}"){
+                                    education1.options[i].selected = true
+                                    break;
+                                }
+                            }
+                            education2 = document.getElementById("xueli2");
+                            for(i=0;i<education2.options.length;i++){
+                                console.log(""+i+":"+(education_list[i] == "{{user.information.education2}}"))
+                                if(education_list[i] == "{{user.information.education2}}"){
+                                    education2.options[i].selected = true
+                                    break;
+                                }
+                            }
+                            education3 = document.getElementById("xueli3");
+                            for(i=0;i<education3.options.length;i++){
+                                console.log(""+i+":"+(education_list[i] == "{{user.information.education3}}"))
+                                if(education_list[i] == "{{user.information.education3}}"){
+                                    education3.options[i].selected = true
                                     break;
                                 }
                             }
