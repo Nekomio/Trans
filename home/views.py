@@ -365,34 +365,64 @@ def get_excel(request):
         w.write(i + 1, 1, fellows[i].sex)
         w.write(i + 1, 2, fellows[i].tell)
         w.write(i + 1, 3, fellows[i].email)
-        w.write(i + 1, 4, fellows[i].department)
-        w.write(i + 1, 5, fellows[i].school_class)
-        w.write(i + 1, 6, fellows[i].education)
-        w.write(i + 1, 7, fellows[i].year_system)
-        w.write(i + 1, 8, fellows[i].year_enroll)
-        w.write(i + 1, 9, fellows[i].year_graduate)
-        w.write(i + 1, 10, fellows[i].teacher)
-        w.write(i + 1, 11, fellows[i].mentor)
-        w.write(i + 1, 12, fellows[i].current_work_unit)
-        w.write(i + 1, 13, fellows[i].address_work_unit)
-        w.write(i + 1, 14, fellows[i].industry_category)
-        w.write(i + 1, 15, fellows[i].unit_property)
-        w.write(i + 1, 16, fellows[i].current_job_title)
-        w.write(i + 1, 17, fellows[i].honour)
-        w.write(i + 1, 18, fellows[i].remark)
+        w.write(i + 1, 4, fellows[i].department1)
+        w.write(i + 1, 5, fellows[i].school_class1)
+        w.write(i + 1, 6, fellows[i].education1)
+        w.write(i + 1, 7, fellows[i].year_system1)
+        w.write(i + 1, 8, fellows[i].year_enroll1)
+        w.write(i + 1, 9, fellows[i].year_graduate1)
+        w.write(i + 1, 10, fellows[i].teacher1)
+        w.write(i + 1, 11, fellows[i].mentor1)
+        
+        w.write(i + 1, 12, fellows[i].department2)
+        w.write(i + 1, 13, fellows[i].school_class2)
+        w.write(i + 1, 14, fellows[i].education2)
+        w.write(i + 1, 15, fellows[i].year_system2)
+        w.write(i + 1, 16, fellows[i].year_enroll2)
+        w.write(i + 1, 17, fellows[i].year_graduate2)
+        w.write(i + 1, 18, fellows[i].teacher2)
+        w.write(i + 1, 19, fellows[i].mentor2)
+
+        w.write(i + 1, 20, fellows[i].department3)
+        w.write(i + 1, 21, fellows[i].school_class3)
+        w.write(i + 1, 22, fellows[i].education3)
+        w.write(i + 1, 23, fellows[i].year_system3)
+        w.write(i + 1, 24, fellows[i].year_enroll3)
+        w.write(i + 1, 25, fellows[i].year_graduate3)
+        w.write(i + 1, 26, fellows[i].teacher3)
+        w.write(i + 1, 27, fellows[i].mentor3)
+
+        w.write(i + 1, 28, fellows[i].current_work_unit)
+        w.write(i + 1, 29, fellows[i].address_work_unit)
+        w.write(i + 1, 30, fellows[i].industry_category)
+        w.write(i + 1, 31, fellows[i].unit_property)
+        w.write(i + 1, 32, fellows[i].current_job_title)
+        w.write(i + 1, 33, fellows[i].honour)
+        w.write(i + 1, 34, fellows[i].remark)
     w.col(2).width = 5000
     w.col(3).width = 6144
     w.col(4).width = 4000
     w.col(5).width = 3000
     w.col(10).width = 4000
     w.col(11).width = 4000
+   
     w.col(12).width = 4000
-    w.col(13).width = 4000
-    w.col(14).width = 4000
-    w.col(15).width = 4000
-    w.col(16).width = 4000
-    w.col(17).width = 4000
-    w.col(18).width = 40000
+    w.col(13).width = 3000
+    w.col(18).width = 4000
+    w.col(19).width = 4000
+
+    w.col(20).width = 4000
+    w.col(21).width = 3000
+    w.col(26).width = 4000
+    w.col(27).width = 4000
+
+    w.col(28).width = 4000
+    w.col(29).width = 4000
+    w.col(30).width = 4000
+    w.col(31).width = 4000
+    w.col(32).width = 4000
+    w.col(33).width = 4000
+    w.col(34).width = 40000
 
     sio = BytesIO()
     ws.save(sio)
