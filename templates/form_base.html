@@ -335,15 +335,15 @@
                     <label class="byr-form-required"> 性别</label>
                 </div>
                 <div class="col-md-4 ">
-                    {% block sex %}
-                    <select id=sex name="sex">
+                    {% block sex_id %}
+                    <select id=sex_id name="sex_id">
                         <option value="0">请选择</option>
-                        {% if user.information.sex == 1 %}
+                        {% if user.information.sex_id == 1 %}
                         <option selected='true' value="1">男</option>
                         {% else %}
                         <option value="1">男</option>
                         {% endif %}
-                        {% if user.information.sex == 2 %}
+                        {% if user.information.sex_id == 2 %}
                         <option selected='true' value="2">女</option>
                         {% else %}
                         <option value="2">女</option>

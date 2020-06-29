@@ -142,8 +142,8 @@ def information_filling(request):
             '1': "男",
             "2": "女",
         }
-        if information.sex_id != switch[dic['sex']]:
-            information.sex_id = switch[dic['sex']]
+        if information.sex_id != switch[dic['sex_id']]:
+            information.sex_id = switch[dic['sex_id']]
             last_change_list.append(fields[1])
 
         if information.tell != dic['tell']:
@@ -365,7 +365,7 @@ def get_excel(request):
     date_format.num_format_str = 'yyyy-mm-dd'
     for i in range(len(fellows)):
         w.write(i + 1, 0, fellows[i].name)
-        if fellows[i].sex_id == 1:
+        if fellows[i].sex_id != 2:
             w.write(i + 1, 1, "男")
         else:
             w.write(i + 1, 1, "女")
